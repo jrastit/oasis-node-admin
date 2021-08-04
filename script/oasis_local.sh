@@ -2,6 +2,6 @@
 . oasis_env.sh
 CMDOASIS="$LOCAL_BIN $@"
 
-#echo $CMDOASIS
+echo $CMDOASIS >&2
 $CMDOASIS
 

@@ -1,27 +1,23 @@
 . oasis_env.sh
 
+echo "stake amount \( x * 10^9 ROSE or TEST\)"
+read AMOUNT
+
 export NONCE=`./nonce.sh`
-export TX=unstake.json
+export TX=gen_escrow.json
 export OUTPUT_TX=$LOCAL_TX/$TX
 
-export AMOUNT=`./get_stake_share.sh`
+echo nonce: $NONCE
 
-if [ -z "$AMOUNT" ]
-then
-	echo "amount is empty"
-	exit 0
-fi
-
-./oasis_local.sh stake account gen_reclaim_escrow \
+./oasis_local.sh stake account gen_escrow \
 	--genesis.file $GENESIS_JSON \
 	--signer.backend file \
 	--signer.dir $ENTITY_DIR \
-	--stake.shares $AMOUNT \
-	--stake.escrow.account $STAKE_ACCOUNT \
+	--stake.amount $AMOUNT \
+	--stake.escrow.account `./get_entity_address.sh` \
 	--transaction.file $OUTPUT_TX \
-	--transaction.fee.gas 1500 \
+	--transaction.fee.gas 2000 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
 
 ./submit_transaction.sh $TX
-

@@ -1,7 +1,7 @@
 export NONCE=`./nonce.sh`
 export TX=transfer.json
 export OUTPUT_TX=$LOCAL_TX/$TX
-export AVAILABLE=`./stakeAvailable.sh`
+export AVAILABLE=`./get_stake_available.sh`
 #keep 100 ROSE 
 export AMOUNT=`expr $AVAILABLE - 100000000000`
 

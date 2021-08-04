@@ -17,4 +17,4 @@ export OUTPUT_TX=$LOCAL_TX/$TX
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
 
-./submit_transaction $TX
+./submit_transaction.sh $TX
