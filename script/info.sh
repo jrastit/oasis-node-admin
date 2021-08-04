@@ -1,3 +1,2 @@
 #!/bin/bash
-
-myoasis.sh stake account info 
+./myoasis.sh stake account info 

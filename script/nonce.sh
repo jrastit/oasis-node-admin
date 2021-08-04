@@ -1,4 +1,4 @@
 #!/bin/bash
 
-NONCE=`myoasis.sh stake account nonce`
+NONCE=`./myoasis.sh stake account nonce`
 echo $NONCE

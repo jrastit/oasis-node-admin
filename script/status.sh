@@ -1,3 +1,3 @@
 #!/bin/bash
 
-oasis.sh control status
+./oasis.sh control status

@@ -2,4 +2,4 @@
 
 . oasis_env.sh
 
-oasis.sh --stake.account.address $STAKE_ADDRESS $@
+./oasis.sh --stake.account.address $STAKE_ADDRESS $@

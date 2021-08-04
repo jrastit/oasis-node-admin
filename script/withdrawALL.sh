@@ -1,7 +1,6 @@
 export NONCE=`./nonce.sh`
-export ENTITY_DIR=/home/oasis/mainnet/entity/
-export GENESIS_JSON=/home/oasis/mainnet/genesis.json
-export OUTPUT_TX=/home/oasis/script/transfer.json
+export TX=transfer.json
+export OUTPUT_TX=$LOCAL_TX/$TX
 export AVAILABLE=`./stakeAvailable.sh`
 export AMOUNT=`expr $AVAILABLE - 100000000000`
 
@@ -11,7 +10,7 @@ then
 	exit 0
 fi
 
-oasis-node stake account gen_transfer \
+./oasis_local.sh stake account gen_transfer \
 	--genesis.file $GENESIS_JSON \
 	--signer.backend file \
 	--signer.dir $ENTITY_DIR \
@@ -22,7 +21,4 @@ oasis-node stake account gen_transfer \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE 
 
-echo copy file $OUTPUT_TX
-scp -4 $OUTPUT_TX oasis@aitvt.com:$OUTPUT_TX
-echo send transaction $OUTPUT_TX
-oasis.sh consensus submit_tx --transaction.file $OUTPUT_TX
+./submit_transaction.sh $TX
