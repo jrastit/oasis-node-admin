@@ -17,7 +17,7 @@ fi
 	--signer.backend file \
 	--signer.dir $ENTITY_DIR \
 	--stake.shares $AMOUNT \
-	--stake.escrow.account oasis1qz26ty8q6gwt6zah7dtt8jpepvwnttkg8ssnxjl7 \
+	--stake.escrow.account $STAKE_ACCOUNT \
 	--transaction.file $OUTPUT_TX \
 	--transaction.fee.gas 1500 \
 	--transaction.fee.amount 0 \
