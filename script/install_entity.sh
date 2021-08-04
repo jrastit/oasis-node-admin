@@ -1,12 +1,11 @@
 . oasis_env.sh
-cd $LOCAL_DIR
-if [[ -d "$LOCAL_DIR/entity" ]]
+if [[ -d "$ENTITY_DIR/entity" ]]
 then
-    echo "$LOCAL_DIR/entity exists on your filesystem. Abroting"
+    echo "$ENTITY_DIR/entity exists on your filesystem. Abroting"
     exit 1
 fi
 
-mkdir -m700 -p entity
-cd entity
+mkdir -m700 -p $ENTITY_DIR
+cd $ENTITY_DIR
 $LOCAL_BIN registry entity init
 

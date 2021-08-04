@@ -2,6 +2,6 @@
 
 . ./oasis_env.sh
 
-echo $NETWORK_BIN $@
-$NETWORK_BIN $@
+echo $NETWORK_BIN -a $NETWORK_ADDR $@
+$NETWORK_BIN -a $NETWORK_ADDR $@
 

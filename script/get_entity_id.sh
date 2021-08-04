@@ -1,3 +1,3 @@
 . oasis_env.sh
-cat $LOCAL_DIR/entity/entity.json | awk 'BEGIN { FS = "\"" } ;{print($6)}' 
+cat $ENTITY_DIR/entity.json | awk 'BEGIN { FS = "\"" } ;{print($6)}' 
 
