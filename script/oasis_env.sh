@@ -36,18 +36,16 @@ if [ -n "$CUSTOM_OASIS_GENESIS_URL" ] ; then
 fi
 
 if [ -n "$CUSTOM_NETWORK_ADDR" ] ; then 
-	NETWORK_ADDR=$NETWORK_ADDR
+	NETWORK_ADDR=$CUSTOM_NETWORK_ADDR
 fi
 
 if [ -n "$CUSTOM_NETWORK_CONFIG" ] ; then 
-	NETWORK_CONFIG=$NETWORK_NETWORK_CONFIG
+	NETWORK_CONFIG=$CUSTOM_NETWORK_CONFIG
 fi
-
 
 OASIS_CORE_DIR="oasis_core_${OASIS_CORE_VERSION}_linux_amd64"
 OASIS_CORE_TAR="${OASIS_CORE_DIR}.tar.gz"
 OASIS_CORE_URL="https://github.com/oasisprotocol/oasis-core/releases/download/v${OASIS_CORE_VERSION}/${OASIS_CORE_TAR}"
-OASIS_GENESIS_URL="https://github.com/oasisprotocol/testnet-artifacts/releases/download/2021-04-13/genesis.json"
 
 LOCAL_DIR="$SCRIPT_DIR/.."
 LOCAL_BIN="$LOCAL_DIR/oasis-core/$OASIS_CORE_DIR/oasis-node"
@@ -61,5 +59,7 @@ SSHCMD="ssh -4 $NETWORK_HOST"
 NETWORK_BIN="$SSHCMD $NETWORK_BIN_PATH"
 NETWORK_BIN_SCREEN="$SSHCMD screen -S $NETWORK_NODE_NAME -dm $NETWORK_BIN_PATH"
 NETWORK_SCREEN="$SSHCMD -t screen -r $NETWORK_NODE_NAME"
+
+SCRIPT_ACCOUNT_INFO_DIR="$SCRIPT_DIR/account_info"
 
 mkdir -p $LOCAL_TX
