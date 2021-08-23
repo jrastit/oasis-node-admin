@@ -13,4 +13,6 @@ else
 	echo "Local dir $OASIS_CORE_DIR already exist"
 fi
 
+rsync -rv $LOCAL_DIR/oasis-core/$OASIS_CORE_DIR $NETWORK_HOST:$NETWORK_BIN_PATH
+
 
