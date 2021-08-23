@@ -8,6 +8,7 @@ OASIS_CORE_VERSION="21.2.7"
 OASIS_GENESIS_URL="https://github.com/oasisprotocol/testnet-artifacts/releases/download/2021-04-13/genesis.json"
 NETWORK_ADDR="unix:$NETWORK_DIR/node/data/internal.sock"
 NETWORK_CONFIG="$NETWORK_DIR/node/etc/config.yml"
+NETWORK_GENESIS="$NETWORK_DIR/node/etc/genesis.json"
 
 . $SCRIPT_DIR/oasis_custom.sh
 
@@ -41,6 +42,10 @@ fi
 
 if [ -n "$CUSTOM_NETWORK_CONFIG" ] ; then 
 	NETWORK_CONFIG=$CUSTOM_NETWORK_CONFIG
+fi
+
+if [ -n "$CUSTOM_NETWORK_GENESIS" ] ; then 
+	NETWORK_GENESIS=$CUSTOM_NETWORK_GENESIS
 fi
 
 OASIS_CORE_DIR="oasis_core_${OASIS_CORE_VERSION}_linux_amd64"
