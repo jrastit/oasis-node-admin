@@ -1,9 +1,9 @@
-export NONCE=`./nonce.sh`
-export TX=transfer.json
-export OUTPUT_TX=$LOCAL_TX/$TX
-export AVAILABLE=`./get_stake_available.sh`
+NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
+TX=transfer.json
+OUTPUT_TX=$LOCAL_TX/$TX
+AVAILABLE=`$SCRIPT_ACCOUNT_INFO_DIR/get_stake_available.sh`
 #keep 100 ROSE 
-export AMOUNT=`expr $AVAILABLE - 100000000000`
+AMOUNT=`expr $AVAILABLE - 100000000000`
 
 if [ -z "$AMOUNT" ]
 then
@@ -14,7 +14,7 @@ fi
 echo destination address \( oasis... \)
 read TO_ADDRESS
 
-./oasis_local.sh stake account gen_transfer \
+$SCRIPT_DIR/oasis_local.sh stake account gen_transfer \
 	--genesis.file $GENESIS_JSON \
 	--signer.backend file \
 	--signer.dir $ENTITY_DIR \
@@ -25,4 +25,4 @@ read TO_ADDRESS
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE 
 
-./submit_transaction.sh $TX
+$SCRIPT_DIR/submit_transaction.sh $TX
