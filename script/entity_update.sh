@@ -1,9 +1,6 @@
 . oasis_env.sh
 
-echo node ids
-read NODE_IDS \(id1,id2\)
-
-NODE_JSON_LIST=`find $ENTITY_DIR/node_genesis.json | xargs -d ","`
+NODE_JSON_LIST=`find -L $ENTITY_DIR/node -name node_genesis.json | xargs -d ","`
 echo json list : $NODE_JSON_LIST
 
 export NONCE=`./nonce.sh`
