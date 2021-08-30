@@ -2,6 +2,15 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
+if [[ -n "$CUSTOM_OASIS_NODE_ADDR" ]]
+then
+	OASIS_NODE_ADDR=$CUSTOM_OASIS_NODE_ADDR
+else
+	echo "Register node ip" 
+	read OASIS_NODE_ADDR	
+fi
+
+
 if [[ -d "$LOCAL_NODE_DIR" ]]
 then
   echo "$LOCAL_NODE_DIR exists on your filesystem. no new node generation"
@@ -15,17 +24,10 @@ else
 
 	$LOCAL_BIN registry node init \
 		--node.entity_id `$SCRIPT_DIR/account_info/get_entity_id.sh` \
-		--node.consensus_address $NODE_IP_PORT \
+		--node.consensus_address $OASIS_NODE_ADDR:$OASIS_NODE_PORT \
 		--node.role validator
 fi
 
-if [[ -n "$CUSTOM_NODE_ADDR" ]]
-then
-	NODE_IP_PORT=$CUSTOM_NODE_ADDR
-else
-	echo "Register node ip:port" 
-	read NODE_IP_PORT	
-fi
 
 echo $REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
 $REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
@@ -55,8 +57,8 @@ consensus:
   validator: true
   tendermint:
     core:
-      listen_address: tcp://$NETWORK_HOST
-      external_address: tcp://$NETWORK_HOST
+      listen_address: tcp://$OASIS_NODE_LISTEN_ADDR:$OASIS_NODE_PORT
+      external_address: tcp://$OASIS_NODE_ADDR:$OASIS_NODE_PORT
     p2p:
       seed:
         - \"$OASIS_SEED_NODE\"
