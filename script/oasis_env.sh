@@ -25,6 +25,7 @@ if [ -n "$CUSTOM_NETWORK_DIR" ] ; then
 fi
 
 NETWORK_BIN_PATH="$NETWORK_DIR/oasis-core"
+NETWORK_RUNTIME_PATH="$NETWORK_DIR/runtimes"
 NETWORK_TX="$NETWORK_DIR/tx"
 NETWORK_ADDR="unix:$NETWORK_DIR/node/data/internal.sock"
 NETWORK_CONFIG="$NETWORK_DIR/node/etc/config.yml"
