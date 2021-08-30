@@ -3,8 +3,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 NETWORK_NODE_NAME=testnet
 NETWORK_HOST=oasis@host
 NETWORK_DIR="/home/oasis/testnet"
-NETWORK_BIN_PATH="$NETWORK_DIR/node/bin/oasis-node"
-OASIS_CORE_VERSION="21.2.7"
+NETWORK_BIN_PATH="$NETWORK_DIR/oasis-core"
+NETWORK_TX="$NETWORK_DIR/tx"
+OASIS_CORE_VERSION="21.2.8"
 OASIS_GENESIS_URL="https://github.com/oasisprotocol/testnet-artifacts/releases/download/2021-04-13/genesis.json"
 NETWORK_ADDR="unix:$NETWORK_DIR/node/data/internal.sock"
 NETWORK_CONFIG="$NETWORK_DIR/node/etc/config.yml"
@@ -26,6 +27,10 @@ fi
 
 if [ -n "$CUSTOM_NETWORK_BIN_PATH" ] ; then 
 	NETWORK_BIN_PATH=$CUSTOM_NETWORK_BIN_PATH;
+fi
+
+if [ -n "$CUSTOM_NETWORK_TX" ] ; then 
+	NETWORK_TX=$CUSTOM_NETWORK_TX;
 fi
 
 if [ -n "$CUSTOM_OASIS_CORE_VERSION" ] ; then 

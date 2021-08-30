@@ -2,7 +2,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-NODE_JSON_LIST=`find -L $ENTITY_DIR/node -name node_genesis.json | xargs -d ","`
+NODE_JSON_LIST=`find -L $ENTITY_DIR/node -name node_genesis.json | awk '{r=r s $1;s=","} END{print r}'`
 echo json list : $NODE_JSON_LIST
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
