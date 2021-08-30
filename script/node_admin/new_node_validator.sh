@@ -52,9 +52,9 @@ worker:
     entity: $NETWORK_DIR/node/entity/entity.json
 
 consensus:
-	validator: true
+  validator: true
   tendermint:
-		core:
+    core:
       listen_address: tcp://$NETWORK_HOST
       external_address: tcp://$NETWORK_HOST
     p2p:
