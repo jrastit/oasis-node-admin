@@ -87,7 +87,10 @@ runtime:
     signatures:
       \"$CUSTOM_PARATIME_RUNTIME_IDENTIFIER\": $NETWORK_RUNTIME_PATH/$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig
 
-
+ias:
+  proxy:
+    address:
+      - \"$CUSTOM_PARATIME_RUNTIME_IAS\"
   
 EOF"
 
