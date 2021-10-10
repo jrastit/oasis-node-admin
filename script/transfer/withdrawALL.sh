@@ -1,3 +1,6 @@
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+. $SCRIPT_DIR/oasis_env.sh
+
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
 TX=transfer.json
 OUTPUT_TX=$LOCAL_TX/$TX
