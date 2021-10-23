@@ -2,6 +2,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 #import
 NETWORK_NODE_NAME=testnet
 NETWORK_HOST=oasis@host
+NETWORK_HOST_ADMIN=oasis@host
 OASIS_NODE_PORT=26656
 OASIS_NODE_LISTEN_ADDR=0.0.0.0
 OASIS_CORE_VERSION="21.3.3"
@@ -18,6 +19,10 @@ NETWORK_DIR="/home/oasis/$NETWORK_NODE_NAME"
 
 if [ -n "$CUSTOM_NETWORK_HOST" ] ; then 
 	NETWORK_HOST=$CUSTOM_NETWORK_HOST
+fi
+
+if [ -n "$CUSTOM_NETWORK_HOST_ADMIN" ] ; then 
+	NETWORK_HOST_ADMIN=$CUSTOM_NETWORK_HOST_ADMIN
 fi
 
 if [ -n "$CUSTOM_NETWORK_DIR" ] ; then 
@@ -100,4 +105,9 @@ else
 	REMOTE_DIR="$NETWORK_DIR"
 fi
 
+if [ -n "$NETWORK_HOST_ADMIN" ]; then
+	REMOTE_CMD_ADMIN="ssh -4 $NETWORK_HOST_ADMIN sudo"
+else 
+	REMOTE_CMD_ADMIN="sudo"
+fi
 mkdir -p $LOCAL_TX
