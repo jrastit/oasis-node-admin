@@ -19,7 +19,7 @@ $REMOTE_CMD_ADMIN apt-get update
 echo $REMOTE_CMD_ADMIN apt-get install bubblewrap intel-sgx-dkms sgx-aesm-service libsgx-aesm-launch-plugin libsgx-aesm-epid-plugin
 $REMOTE_CMD_ADMIN apt-get install bubblewrap intel-sgx-dkms sgx-aesm-service libsgx-aesm-launch-plugin libsgx-aesm-epid-plugin
 
-echo fix SGX /dev issue => $REMOTE_CMD_ADMIN "sed -i s/devsgx=y/devsgx=n/g /etc/modprobe.d/fortanix-isgx.conf"
+echo fix SGX /dev issue $REMOTE_CMD_ADMIN "sed -i s/devsgx=y/devsgx=n/g /etc/modprobe.d/fortanix-isgx.conf"
 $REMOTE_CMD_ADMIN sed -i s/devsgx=y/devsgx=n/g /etc/modprobe.d/fortanix-isgx.conf
 
 
