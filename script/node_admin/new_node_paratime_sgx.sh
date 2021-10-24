@@ -58,13 +58,13 @@ worker:
     enabled: true
   
   client:
-    port: 30001
+    port: $CUSTOM_PARATIME_WORKER_CLIENT_PORT
     addresses:
       - \"$OASIS_NODE_ADDR:$CUSTOM_PARATIME_WORKER_CLIENT_PORT\"
   
   p2p:
     enabled: true
-    port: 30002
+    port: $CUSTOM_PARATIME_WORKER_P2P_PORT
     addresses:
       - \"$OASIS_NODE_ADDR:$CUSTOM_PARATIME_WORKER_P2P_PORT\"
 
