@@ -32,7 +32,7 @@ $REMOTE_CMD mkdir -p $OASIS_NODE_DIR/node/{etc,data,entity}
 echo $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
 $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
 $REMOTE_CMD chmod -R 600 $OASIS_NODE_DIR/node/data/*.pem
-$REMOTE_CP ../../entity.json $REMOTE_DIR/node/entity/entity.json
+$REMOTE_CP $ENTITY_DIR/entity.json $REMOTE_DIR/node/entity/entity.json
 $REMOTE_CMD chmod -R go-r,go-w,go-x $OASIS_NODE_DIR
 
 $REMOTE_CMD "cat > $OASIS_NODE_DIR/node/etc/config.yml <<- EOF

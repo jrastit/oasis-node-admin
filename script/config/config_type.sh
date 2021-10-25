@@ -42,10 +42,10 @@ CONFIG_PARATIME_RUNTIME_IDENTIFIER="$CONFIG_VALUE"
 config_value "PARATIME_RUNTIME_VERSION ex: 1.0.0" "$PARATIME_RUNTIME_VERSION"
 CONFIG_PARATIME_RUNTIME_VERSION="$CONFIG_VALUE"
 
-config_value "PARATIME_RUNTIME_SGSX ex: https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs" "$PARATIME_RUNTIME_SGSX"
+config_value "PARATIME_RUNTIME_SGSX ex: https://github.com/oasisprotocol/cipher-paratime/releases/download/v1.0.0/cipher-paratime.sgxs" "$PARATIME_RUNTIME_SGSX"
 CONFIG_PARATIME_RUNTIME_SGSX="$CONFIG_VALUE"
 
-config_value "PARATIME_RUNTIME_SIG ex: https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig" "$PARATIME_RUNTIME_SIG"
+config_value "PARATIME_RUNTIME_SIG ex: https://github.com/oasisprotocol/cipher-paratime/releases/download/v1.0.0/cipher-paratime.sig" "$PARATIME_RUNTIME_SIG"
 CONFIG_PARATIME_RUNTIME_SIG="$CONFIG_VALUE"
 
 config_value "PARATIME_RUNTIME_IAS ex: tnTwXvGbbxqlFoirBDj63xWtZHS20Lb3fCURv0YDtYw=@34.86.108.137:8650" "$PARATIME_RUNTIME_IAS"
