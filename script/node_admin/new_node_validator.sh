@@ -2,9 +2,9 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-if [[ -n "$CUSTOM_OASIS_NODE_ADDR" ]]
+if [[ -n "$OASIS_NODE_ADDR" ]]
 then
-	OASIS_NODE_ADDR=$CUSTOM_OASIS_NODE_ADDR
+	OASIS_NODE_ADDR=$OASIS_NODE_ADDR
 else
 	echo "Register node ip" 
 	read OASIS_NODE_ADDR	
@@ -29,16 +29,16 @@ else
 fi
 
 
-echo $REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
-$REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
+echo $REMOTE_CMD mkdir -p $OASIS_NODE_DIR/node/{etc,data,entity}
+$REMOTE_CMD mkdir -p $OASIS_NODE_DIR/node/{etc,data,entity}
 echo $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
 $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
-$REMOTE_CMD chmod -R 600 $NETWORK_DIR/node/data/*.pem
+$REMOTE_CMD chmod -R 600 $OASIS_NODE_DIR/node/data/*.pem
 $REMOTE_CP ../../entity.json $REMOTE_DIR/node/entity/entity.json
-$REMOTE_CMD chmod -R go-r,go-w,go-x $NETWORK_DIR
+$REMOTE_CMD chmod -R go-r,go-w,go-x $OASIS_NODE_DIR
 
-$REMOTE_CMD "cat > $NETWORK_DIR/node/etc/config.yml <<- EOF
-datadir: $NETWORK_DIR/node/data
+$REMOTE_CMD "cat > $OASIS_NODE_DIR/node/etc/config.yml <<- EOF
+datadir: $OASIS_NODE_DIR/node/data
 log:
   level:
     default: info
@@ -47,11 +47,11 @@ log:
   format: JSON
 
 genesis:
-  file: $NETWORK_DIR/node/etc/genesis.json
+  file: $OASIS_NODE_DIR/node/etc/genesis.json
 
 worker:
   registration:
-    entity: $NETWORK_DIR/node/entity/entity.json
+    entity: $OASIS_NODE_DIR/node/entity/entity.json
 
 consensus:
   validator: true

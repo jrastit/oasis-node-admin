@@ -1,6 +1,4 @@
-entity/
-entity
-genesis.json
-oasis-core
+oasis-core/
 tx/
-paratime
+paratime/
+config/

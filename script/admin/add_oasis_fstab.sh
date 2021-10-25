@@ -13,6 +13,6 @@ $REMOTE_CMD_ADMIN "bash -c \"echo 'UUID=$OASIS_UUID /oasis auto defaults,nofail,
 
 $REMOTE_CMD_ADMIN mount -a
 
-$REMOTE_CMD_ADMIN mkdir /oasis/$NETWORK_NODE_NAME
-$REMOTE_CMD_ADMIN chown oasis.oasis /oasis/$NETWORK_NODE_NAME
+$REMOTE_CMD_ADMIN mkdir /oasis/$OASIS_NODE_NAME
+$REMOTE_CMD_ADMIN chown oasis.oasis /oasis/$OASIS_NODE_NAME
 

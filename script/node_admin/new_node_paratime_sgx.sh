@@ -2,9 +2,9 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-if [[ -n "$CUSTOM_OASIS_NODE_ADDR" ]]
+if [[ -n "$OASIS_NODE_ADDR" ]]
 then
-	OASIS_NODE_ADDR=$CUSTOM_OASIS_NODE_ADDR
+	OASIS_NODE_ADDR=$OASIS_NODE_ADDR
 else
 	echo "Register node ip" 
 	read OASIS_NODE_ADDR	
@@ -27,16 +27,16 @@ else
 fi
 
 
-echo $REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
-$REMOTE_CMD mkdir -p $NETWORK_DIR/node/{etc,data,entity}
+echo $REMOTE_CMD mkdir -p $OASIS_NODE_DIR/node/{etc,data,entity}
+$REMOTE_CMD mkdir -p $OASIS_NODE_DIR/node/{etc,data,entity}
 echo $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
 $REMOTE_CP consensus.pem consensus_pub.pem identity.pem identity_pub.pem p2p.pem p2p_pub.pem sentry_client_tls_identity.pem sentry_client_tls_identity_cert.pem $REMOTE_DIR/node/data
-$REMOTE_CMD chmod -R 600 $NETWORK_DIR/node/data/*.pem
+$REMOTE_CMD chmod -R 600 $OASIS_NODE_DIR/node/data/*.pem
 $REMOTE_CP ../../entity.json $REMOTE_DIR/node/entity/entity.json
-$REMOTE_CMD chmod -R go-r,go-w,go-x $NETWORK_DIR
+$REMOTE_CMD chmod -R go-r,go-w,go-x $OASIS_NODE_DIR
 
-$REMOTE_CMD "cat > $NETWORK_DIR/node/etc/config.yml <<- EOF
-datadir: $NETWORK_DIR/node/data
+$REMOTE_CMD "cat > $OASIS_NODE_DIR/node/etc/config.yml <<- EOF
+datadir: $OASIS_NODE_DIR/node/data
 log:
   level:
     default: info
@@ -45,11 +45,11 @@ log:
   format: JSON
 
 genesis:
-  file: $NETWORK_DIR/node/etc/genesis.json
+  file: $OASIS_NODE_DIR/node/etc/genesis.json
 
 worker:
   registration:
-    entity: $NETWORK_DIR/node/entity/entity.json
+    entity: $OASIS_NODE_DIR/node/entity/entity.json
 
   storage:
     enabled: true
@@ -58,15 +58,15 @@ worker:
     enabled: true
   
   client:
-    port: $CUSTOM_PARATIME_WORKER_CLIENT_PORT
+    port: $PARATIME_WORKER_CLIENT_PORT
     addresses:
-      - \"$OASIS_NODE_ADDR:$CUSTOM_PARATIME_WORKER_CLIENT_PORT\"
+      - \"$OASIS_NODE_ADDR:$PARATIME_WORKER_CLIENT_PORT\"
   
   p2p:
     enabled: true
-    port: $CUSTOM_PARATIME_WORKER_P2P_PORT
+    port: $PARATIME_WORKER_P2P_PORT
     addresses:
-      - \"$OASIS_NODE_ADDR:$CUSTOM_PARATIME_WORKER_P2P_PORT\"
+      - \"$OASIS_NODE_ADDR:$PARATIME_WORKER_P2P_PORT\"
 
 consensus:
   tendermint:
@@ -79,18 +79,18 @@ consensus:
 
 runtime:
   supported:
-    - \"$CUSTOM_PARATIME_RUNTIME_IDENTIFIER\"
+    - \"$PARATIME_RUNTIME_IDENTIFIER\"
   paths:
-    \"$CUSTOM_PARATIME_RUNTIME_IDENTIFIER\": $NETWORK_RUNTIME_PATH/$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs 
+    \"$PARATIME_RUNTIME_IDENTIFIER\": $OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs 
   sgx:
-    loader: $NETWORK_BIN_PATH/$OASIS_CORE_DIR/oasis-core-runtime-loader
+    loader: $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-core-runtime-loader
     signatures:
-      \"$CUSTOM_PARATIME_RUNTIME_IDENTIFIER\": $NETWORK_RUNTIME_PATH/$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig
+      \"$PARATIME_RUNTIME_IDENTIFIER\": $OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_VERSION/cipher-paratime.sig
 
 ias:
   proxy:
     address:
-      - \"$CUSTOM_PARATIME_RUNTIME_IAS\"
+      - \"$PARATIME_RUNTIME_IAS\"
   
 EOF"
 

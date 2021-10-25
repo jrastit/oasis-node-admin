@@ -2,6 +2,6 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-echo $NETWORK_BIN -a $NETWORK_ADDR $@ >&2
-$NETWORK_BIN -a $NETWORK_ADDR $@
+echo $OASIS_NODE_BIN -a $OASIS_NODE_ADDR $@ >&2
+$OASIS_NODE_BIN -a $OASIS_NODE_ADDR $@
 

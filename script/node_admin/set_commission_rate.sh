@@ -6,7 +6,7 @@ echo update rate \(epoc/percent * 1000\)
 read SCHEDULE_RATES
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=update_rate.json
+TX=update_rate$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 $SCRIPT_DIR/oasis_local.sh stake account gen_amend_commission_schedule \
