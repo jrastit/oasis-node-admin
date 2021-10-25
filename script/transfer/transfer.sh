@@ -8,7 +8,7 @@ echo address \( oasis... \)
 read ADDRESS
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=transfer.json
+TX=transfer$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 $SCRIPT_DIR/oasis_local.sh stake account gen_transfer \

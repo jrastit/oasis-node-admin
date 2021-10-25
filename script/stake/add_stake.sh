@@ -8,7 +8,7 @@ echo "stake amount \( x * 10^9 ROSE or TEST\)"
 read AMOUNT
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=gen_escrow.json
+TX=add_stake$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 echo nonce: $NONCE

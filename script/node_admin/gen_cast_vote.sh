@@ -6,7 +6,7 @@ echo "proposal id"
 read PROPOSAL_ID
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=proposal.json
+TX=proposal$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 $SCRIPT_DIR/oasis_local.sh governance gen_cast_vote gen_amend_commission_schedule \

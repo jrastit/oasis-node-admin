@@ -6,7 +6,7 @@ NODE_JSON_LIST=`find -L $ENTITY_DIR/node -name node_genesis.json | awk '{r=r s $
 echo json list : $NODE_JSON_LIST
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=update_entity.json
+TX=update_entity$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 $SCRIPT_DIR/oasis_local.sh registry entity update \

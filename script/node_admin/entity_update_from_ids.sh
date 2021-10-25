@@ -11,7 +11,7 @@ NODE_IDS=`find -L $ENTITY_DIR/node -name identity_pub.pem -exec awk "NR==2" {} \
 echo Node id = $NODE_IDS
 
 NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
-TX=update_entity.json
+TX=update_entity$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
 $SCRIPT_DIR/oasis_local.sh registry entity update \
