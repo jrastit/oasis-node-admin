@@ -106,7 +106,7 @@ else
 fi
 
 if [ -n "$NETWORK_HOST_ADMIN" ]; then
-	REMOTE_CMD_ADMIN="ssh -t -4 $NETWORK_HOST_ADMIN sudo"
+	REMOTE_CMD_ADMIN="ssh -o LogLevel=QUIET -t -4 $NETWORK_HOST_ADMIN sudo"
 else 
 	REMOTE_CMD_ADMIN="sudo"
 fi
