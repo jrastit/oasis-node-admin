@@ -2,8 +2,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-cd $LOCAL_DIR
-wget -O genesis.json $OASIS_GENESIS_URL
+wget -O $GENESIS_JSON $OASIS_GENESIS_URL
 
-rsync -rv $LOCAL_DIR/genesis.json $OASIS_NODE_SSH:$OASIS_NODE_GENESIS
+rsync -rv $GENESIS_JSON $OASIS_NODE_SSH:$OASIS_NODE_GENESIS
 

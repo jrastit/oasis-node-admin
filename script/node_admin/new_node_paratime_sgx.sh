@@ -45,7 +45,7 @@ log:
   format: JSON
 
 genesis:
-  file: $OASIS_NODE_DIR/node/etc/genesis.json
+  file: $OASIS_NODE_GENESIS
 
 worker:
   registration:
