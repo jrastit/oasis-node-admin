@@ -5,8 +5,8 @@ NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
 TX=withdraw$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 AVAILABLE=`$SCRIPT_ACCOUNT_INFO_DIR/get_stake_available.sh`
-#keep 100 ROSE 
-AMOUNT=`expr $AVAILABLE - 100000000000`
+#keep 2000 ROSE 
+AMOUNT=`expr $AVAILABLE - 2000000000000`
 
 if [ -z "$AMOUNT" ]
 then
