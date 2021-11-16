@@ -23,9 +23,7 @@ else
 	cd $LOCAL_NODE_DIR
 
 	$LOCAL_BIN registry node init \
-		--node.entity_id `$SCRIPT_DIR/account_info/get_entity_id.sh` \
-		--node.consensus_address $OASIS_NODE_ADDR:$OASIS_NODE_PORT \
-		--node.role validator
+		--node.entity_id `$SCRIPT_DIR/account_info/get_entity_id.sh` 
 fi
 
 
@@ -53,8 +51,24 @@ worker:
   registration:
     entity: $OASIS_NODE_DIR/node/entity/entity.json
 
+  storage:
+    enabled: true
+  
+  compute:
+    enabled: true
+  
+  client:
+    port: $PARATIME_WORKER_CLIENT_PORT
+    addresses:
+      - \"$OASIS_NODE_ADDR:$PARATIME_WORKER_CLIENT_PORT\"
+  
+  p2p:
+    enabled: true
+    port: $PARATIME_WORKER_P2P_PORT
+    addresses:
+      - \"$OASIS_NODE_ADDR:$PARATIME_WORKER_P2P_PORT\"
+
 consensus:
-  validator: true
   tendermint:
     core:
       listen_address: tcp://$OASIS_NODE_LISTEN_ADDR:$OASIS_NODE_PORT
@@ -62,6 +76,14 @@ consensus:
     p2p:
       seed:
         - \"$OASIS_SEED_NODE\"
+
+runtime:
+  supported:
+    - \"$PARATIME_RUNTIME_IDENTIFIER\"
+  paths:
+    \"$PARATIME_RUNTIME_IDENTIFIER\": $OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_VERSION/emerald-paratime 
+
+  
 EOF"
 
 

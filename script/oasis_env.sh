@@ -137,6 +137,7 @@ if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then
 	PARATIME_RUNTIME_VERSION=$CUSTOM_PARATIME_RUNTIME_VERSION
 	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
 	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
+	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
 fi
 
 if [ -n "$CUSTOM_PARATIME_RUNTIME_SGSX" ] ; then 
