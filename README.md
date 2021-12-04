@@ -1,4 +1,6 @@
-# oasis
+# oasis node admin
+
+Bash script to manage oasis node
 
 > Local dependency jq
 sudo apt-get install jq
