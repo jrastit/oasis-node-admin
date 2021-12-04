@@ -5,7 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 echo update rate \(epoc/percent * 1000\)
 read SCHEDULE_RATES
 
-NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
+NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
 TX=update_rate$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
@@ -18,5 +18,10 @@ $SCRIPT_DIR/oasis_local.sh stake account gen_amend_commission_schedule \
 	--transaction.fee.gas 1000 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
+
+if [ $? -ne 0 ]; then
+	echo Error: transaction error
+	exit 1
+fi 
 
 $SCRIPT_DIR/submit_transaction.sh $TX

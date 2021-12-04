@@ -4,11 +4,11 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 echo "stake amount \( x * 10^9 ROSE or TEST\)"
 read AMOUNT
 
-NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
+NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
 TX=add_self_stake$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
-ESCROW_ACCOUNT=`$SCRIPT_ACCOUNT_INFO_DIR/get_entity_address.sh`
+ESCROW_ACCOUNT=`$SCRIPT_ENTITY_INFO_DIR/get_entity_address.sh`
 
 echo nonce: $NONCE
 
@@ -22,5 +22,10 @@ $SCRIPT_DIR/oasis_local.sh stake account gen_escrow \
 	--transaction.fee.gas 2000 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
+
+if [ $? -ne 0 ]; then
+	echo Error: transaction error
+	exit 1
+fi 
 
 $SCRIPT_DIR/submit_transaction.sh $TX

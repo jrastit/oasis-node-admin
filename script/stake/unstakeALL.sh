@@ -1,12 +1,12 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
+NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
 TX=unstake$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
-AMOUNT=`$SCRIPT_ACCOUNT_INFO_DIR/get_stake_share.sh`
-ESCROW_ACCOUNT=`$SCRIPT_ACCOUNT_INFO_DIR/get_entity_address.sh`
+AMOUNT=`$SCRIPT_ENTITY_INFO_DIR/get_stake_share.sh`
+ESCROW_ACCOUNT=`$SCRIPT_ENTITY_INFO_DIR/get_entity_address.sh`
 
 
 if [ -z "$AMOUNT" ]
@@ -25,6 +25,11 @@ $SCRIPT_DIR/oasis_local.sh stake account gen_reclaim_escrow \
 	--transaction.fee.gas 1500 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
+
+if [ $? -ne 0 ]; then
+	echo Error: transaction error
+	exit 1
+fi 
 
 $SCRIPT_DIR/submit_transaction.sh $TX
 

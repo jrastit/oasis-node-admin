@@ -11,9 +11,25 @@ config_value () {
 
 }
 
+log_cmd () {
+	echo "$@"
+	$@
+}
+
+download_file () {
+	wget -q -O $1 $2
+	if [ $? -ne 0 ]; then
+		echo Error: url not found $PARATIME_RUNTIME_EMERALD
+		exit 1
+	fi 
+}
+
+
 if [ -z "$OASIS_NODE_NAME" ] ; then 
 	OASIS_NODE_NAME=oasis_node
 fi
+
+LOCAL_DIR="$SCRIPT_DIR/.."
 
 #import
 OASIS_NODE_NETWORK="testnet"
@@ -26,10 +42,13 @@ OASIS_NODE_SSH_ADMIN_NAME=oasis
 OASIS_NODE_PORT=26656
 OASIS_NODE_LISTEN_ADDR=0.0.0.0
 
+
 OASIS_CORE_VERSION="21.3.3"
 OASIS_GENESIS_URL="https://github.com/oasisprotocol/testnet-artifacts/releases/download/2021-04-13/genesis.json"
 OASIS_SEED_NODE="05EAC99BB37F6DAAD4B13386FF5E087ACBDDC450@34.86.165.6:26656"
 
+PARATIME_WORKER_CLIENT_PORT=30001
+PARATIME_WORKER_P2P_PORT=30002
 
 CONFIG_NODE_DIR=$SCRIPT_DIR/../config/node/$OASIS_NODE_NAME
 . $CONFIG_NODE_DIR/node_config.sh
@@ -38,9 +57,15 @@ if [ -n "$CUSTOM_OASIS_NODE_NETWORK" ] ; then
 	OASIS_NODE_NETWORK=$CUSTOM_OASIS_NODE_NETWORK
 fi
 
+if [ -n "$CUSTOM_OASIS_NODE_ENTITY" ] ; then 
+	OASIS_NODE_ENTITY=$CUSTOM_OASIS_NODE_ENTITY
+fi
+
 if [ -n "$CUSTOM_OASIS_NODE_TYPE" ] ; then 
 	OASIS_NODE_TYPE=$CUSTOM_OASIS_NODE_TYPE
 fi
+
+CONFIG_ENTITY_DIR=$SCRIPT_DIR/../config/entity/$OASIS_NODE_NETWORK
 
 CONFIG_NETWORK_DIR=$SCRIPT_DIR/../config/network/$OASIS_NODE_NETWORK
 . $CONFIG_NETWORK_DIR/network_config.sh
@@ -51,7 +76,6 @@ CONFIG_TYPE_DIR=$SCRIPT_DIR/../config/network/$OASIS_NODE_NETWORK/$OASIS_NODE_TY
 if [ -n "$CUSTOM_OASIS_NODE_ROOT_DIR" ] ; then 
 	OASIS_NODE_ROOT_DIR=$CUSTOM_OASIS_NODE_ROOT_DIR
 fi
-
 
 OASIS_NODE_DIR="$OASIS_NODE_ROOT_DIR/$OASIS_NODE_NAME"
 
@@ -138,6 +162,7 @@ if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then
 	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
 	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
 	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
+	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/cipher/$PARATIME_RUNTIME_VERSION
 fi
 
 if [ -n "$CUSTOM_PARATIME_RUNTIME_SGSX" ] ; then 
@@ -165,11 +190,11 @@ OASIS_CORE_DIR="oasis_core_${OASIS_CORE_VERSION}_linux_amd64"
 OASIS_CORE_TAR="${OASIS_CORE_DIR}.tar.gz"
 OASIS_CORE_URL="https://github.com/oasisprotocol/oasis-core/releases/download/v${OASIS_CORE_VERSION}/${OASIS_CORE_TAR}"
 
-LOCAL_DIR="$SCRIPT_DIR/.."
+
 LOCAL_BIN="$LOCAL_DIR/oasis-core/$OASIS_CORE_DIR/oasis-node"
 LOCAL_TX="$LOCAL_DIR/tx"
 
-ENTITY_DIR="$CONFIG_NODE_DIR/entity"
+ENTITY_DIR=$CONFIG_ENTITY_DIR/$OASIS_NODE_ENTITY
 GENESIS_JSON="$CONFIG_TYPE_DIR/genesis.json"
 LOCAL_NODE_DIR="$CONFIG_NODE_DIR/node"
 
@@ -182,15 +207,19 @@ OASIS_NODE_CLI="$SSHCMD $OASIS_NODE_DIR/cli/cli"
 OASIS_NODE_BIN_SCREEN="$SSHCMD screen -S $OASIS_NODE_NAME -dm $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node"
 OASIS_NODE_SCREEN="$SSHCMD -t screen -r $OASIS_NODE_NAME"
 
-SCRIPT_ACCOUNT_INFO_DIR="$SCRIPT_DIR/account_info"
+SCRIPT_ENTITY_INFO_DIR="$SCRIPT_DIR/entity_info"
+SCRIPT_ENTITY_ADMIN_DIR="$SCRIPT_DIR/entity_admin"
+SCRIPT_NODE_INFO_DIR="$SCRIPT_DIR/node_info"
 
 if [ -n "$OASIS_NODE_SSH" ]; then
 	REMOTE_CMD="ssh -4 $OASIS_NODE_SSH"
 	REMOTE_CP="scp -4 "
+	REMOTE_SYNC="rsync -vr"
 	REMOTE_DIR="$OASIS_NODE_SSH:$OASIS_NODE_DIR"
 else 
 	REMOTE_CMD=""
 	REMOTE_CP="cp"
+	REMOTE_SYNC="rsync -vr"
 	REMOTE_DIR="$OASIS_NODE_DIR"
 fi
 

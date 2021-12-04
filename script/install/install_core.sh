@@ -6,13 +6,13 @@ cd $LOCAL_DIR
 mkdir -p oasis-core
 cd oasis-core
 if [ ! -d "$OASIS_CORE_DIR" ]; then
-	wget -O $OASIS_CORE_TAR  $OASIS_CORE_URL
+	download_file $OASIS_CORE_TAR  $OASIS_CORE_URL
 	tar -xf $OASIS_CORE_TAR
 	rm -f $OASIS_CORE_TAR
 else
 	echo "Local dir $OASIS_CORE_DIR already exist"
 fi
 
-rsync -rv $LOCAL_DIR/oasis-core/$OASIS_CORE_DIR $OASIS_NODE_SSH:$OASIS_NODE_BIN_PATH
+log_cmd $REMOTE_SYNC $LOCAL_DIR/oasis-core/$OASIS_CORE_DIR $OASIS_NODE_SSH:$OASIS_NODE_BIN_PATH
 
 

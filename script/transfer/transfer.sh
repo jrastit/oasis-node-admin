@@ -7,7 +7,7 @@ read AMOUNT
 echo address \( oasis... \)
 read ADDRESS
 
-NONCE=`$SCRIPT_ACCOUNT_INFO_DIR/nonce.sh`
+NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
 TX=transfer$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 
@@ -21,6 +21,11 @@ $SCRIPT_DIR/oasis_local.sh stake account gen_transfer \
 	--transaction.fee.gas 1500 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
+
+if [ $? -ne 0 ]; then
+	echo Error: transaction error
+	exit 1
+fi 
 
 $SCRIPT_DIR/submit_transaction.sh $TX
 
