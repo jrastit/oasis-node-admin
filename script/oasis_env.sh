@@ -162,7 +162,7 @@ if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then
 	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
 	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
 	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
-	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/cipher/$PARATIME_RUNTIME_VERSION
+	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/$OASIS_NODE_TYPE/$PARATIME_RUNTIME_VERSION
 fi
 
 if [ -n "$CUSTOM_PARATIME_RUNTIME_SGSX" ] ; then 
@@ -214,7 +214,7 @@ SCRIPT_NODE_INFO_DIR="$SCRIPT_DIR/node_info"
 if [ -n "$OASIS_NODE_SSH" ]; then
 	REMOTE_CMD="ssh -4 $OASIS_NODE_SSH"
 	REMOTE_CP="scp -4 "
-	REMOTE_SYNC="rsync -vr"
+	REMOTE_SYNC="rsync -pvr"
 	REMOTE_DIR="$OASIS_NODE_SSH:$OASIS_NODE_DIR"
 else 
 	REMOTE_CMD=""

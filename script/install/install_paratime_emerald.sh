@@ -5,7 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 if [ ! -d "$PARATIME_RUNTIME_DIR" ]; then
 	mkdir -p $PARATIME_RUNTIME_DIR
 	download_file $PARATIME_RUNTIME_DIR/emerald-paratime $PARATIME_RUNTIME_EMERALD
-	chmod +x emerald-paratime
+	chmod +x $PARATIME_RUNTIME_DIR/emerald-paratime
 fi
 
 $REMOTE_CMD mkdir -p $OASIS_NODE_RUNTIME_PATH/emerald

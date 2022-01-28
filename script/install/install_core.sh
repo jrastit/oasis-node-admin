@@ -13,6 +13,6 @@ else
 	echo "Local dir $OASIS_CORE_DIR already exist"
 fi
 
-log_cmd $REMOTE_SYNC $LOCAL_DIR/oasis-core/$OASIS_CORE_DIR $OASIS_NODE_SSH:$OASIS_NODE_BIN_PATH
+#log_cmd $REMOTE_SYNC $LOCAL_DIR/oasis-core/$OASIS_CORE_DIR $OASIS_NODE_SSH:$OASIS_NODE_BIN_PATH
 
 
