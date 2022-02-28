@@ -1,0 +1,6 @@
+#/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+. $SCRIPT_DIR/oasis_env.sh
+
+echo CUSTOM_OASIS_CORE_VERSION $CUSTOM_OASIS_CORE_VERSION
+echo CUSTOM_PARATIME_RUNTIME_VERSION $CUSTOM_PARATIME_RUNTIME_VERSION
