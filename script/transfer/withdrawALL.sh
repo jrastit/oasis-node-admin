@@ -2,9 +2,11 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
 NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
+echo nonce $NONCE
 TX=withdraw$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 AVAILABLE=`$SCRIPT_ENTITY_INFO_DIR/get_stake_available.sh`
+echo availlable $AVAILABLE
 #keep 2000 ROSE 
 AMOUNT=`expr $AVAILABLE - 2000000000000`
 

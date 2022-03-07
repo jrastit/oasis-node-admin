@@ -162,7 +162,12 @@ if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then
 	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
 	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
 	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
+	PARATIME_RUNTIME_EMERALD_ORC="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
 	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/$OASIS_NODE_TYPE/$PARATIME_RUNTIME_VERSION
+fi
+
+if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION_OLD" ] ; then
+	PARATIME_RUNTIME_VERSION_OLD=$CUSTOM_PARATIME_RUNTIME_VERSION_OLD
 fi
 
 if [ -n "$CUSTOM_PARATIME_RUNTIME_SGSX" ] ; then 
