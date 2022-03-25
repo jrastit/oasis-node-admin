@@ -162,8 +162,6 @@ if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then
 	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
 	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
 	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
-	PARATIME_RUNTIME_EMERALD_ORC="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
-	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/$OASIS_NODE_TYPE/$PARATIME_RUNTIME_VERSION
 fi
 
 if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION_OLD" ] ; then
@@ -234,4 +232,32 @@ if [ -n "$OASIS_NODE_SSH_ADMIN" ]; then
 else 
 	REMOTE_CMD_ADMIN="sudo"
 fi
+
+case $OASIS_NODE_TYPE in
+	validator)	
+	;;
+	emerald)
+		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
+	;;
+	cipher-paratime)
+		PARATIME_RUNTIME_ORC="cipher-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
+	;;
+	*)
+		echo "config error type : $OASIS_NODE_TYPE not found"
+	;;
+esac
+
+if [ -n "$PARATIME_RUNTIME_VERSION" ] ; then 
+	PARATIME_RUNTIME_DIR_NAME=$OASIS_NODE_TYPE
+	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION
+	PARATIME_RUNTIME_REMOTE_DIR=$OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION
+	if [ -n "$PARATIME_RUNTIME_VERSION_OLD" ] ; then 
+		PARATIME_RUNTIME_OLD_REMOTE_DIR=$OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION_OLD
+	fi
+fi
+
+
+
 mkdir -p $LOCAL_TX

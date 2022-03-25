@@ -41,11 +41,23 @@ consensus:
 runtime:
   mode: compute
   paths:
-    - $OASIS_NODE_RUNTIME_PATH/emerald/$PARATIME_RUNTIME_VERSION/emerald-paratime.orc" 
+    - $PARATIME_RUNTIME_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
 
-if [ -n "$PARATIME_RUNTIME_VERSION_OLD" ] ; then
+if [ -n "$PARATIME_RUNTIME_OLD_REMOTE_DIR" ] ; then
     CMD="$CMD
-    - $OASIS_NODE_RUNTIME_PATH/emerald/$PARATIME_RUNTIME_VERSION_OLD/emerald-paratime.orc" 
+    - $PARATIME_RUNTIME_OLD_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
+fi
+
+if [ -n "$PARATIME_RUNTIME_IAS" ] ; then
+    CMD="$CMD
+
+  sgx:
+    loader: $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-core-runtime-loader
+    
+ias:
+  proxy:
+    address:
+      - \"$PARATIME_RUNTIME_IAS\""
 fi
 
 CMD="$CMD

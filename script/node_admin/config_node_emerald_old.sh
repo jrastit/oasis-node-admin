@@ -20,12 +20,10 @@ worker:
 
   storage:
     enabled: true
-    checkpointer:
-      disable: true
   
   compute:
     enabled: true
-
+  
   client:
     port: $PARATIME_WORKER_CLIENT_PORT
     addresses:
