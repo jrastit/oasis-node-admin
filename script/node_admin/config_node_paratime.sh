@@ -63,6 +63,6 @@ fi
 CMD="$CMD
 
 EOF"
-echo -e "$CMD"
+#echo -e "$CMD"
 $REMOTE_CMD "$CMD"
 

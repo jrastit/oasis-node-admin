@@ -4,3 +4,5 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 ENTITY_ID=`$SCRIPT_ENTITY_INFO_DIR/get_entity_id.sh`
 $SCRIPT_DIR/oasis_local.sh stake pubkey2address --public_key $ENTITY_ID
+
+sleep 1

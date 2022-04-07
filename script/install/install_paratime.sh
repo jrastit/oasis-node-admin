@@ -2,6 +2,11 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
+if [[ "$OASIS_CORE_VERSION" != "22."* ]]; then
+	echo skip because core version is not 22
+	exit 1
+fi
+
 echo $PARATIME_RUNTIME_ORC_LINK
 echo $PARATIME_RUNTIME_REMOTE_DIR/$PARATIME_RUNTIME_ORC
 
