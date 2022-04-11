@@ -22,6 +22,10 @@ if [[ RESULT -ne 0 ]] ; then
   echo node error
   exit 1
 fi
+
+#echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee'
+#exit 0
+
 #echo ${OASIS_CORE_VERSION}
 CORE_VERSION=`echo -e "$STATUS" | jq -r .software_version`
 
@@ -32,8 +36,10 @@ fi
 #echo Paratime
 #echo $PARATIME_RUNTIME_VERSION
 if [ ! -z "$PARATIME_RUNTIME_VERSION" ] ; then 
-  MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.major'`
-  MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.minor'`
+  #MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.major'`
+  #MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.minor'`
+  MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].major'`
+  MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].minor'`
   PARATIME_VERSION=$MAJOR.$MINOR
   if [[ ${PARATIME_RUNTIME_VERSION} != ${PARATIME_VERSION}* ]] ; then
     echo paratime version error ${PARATIME_VERSION}/${PARATIME_RUNTIME_VERSION}
@@ -60,4 +66,6 @@ if [ -z "$PARATIME_RUNTIME_VERSION" ] ; then
 else
   echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` - `displaytime $LAST_REGISTRATION_DIFF`
 fi
+
+$SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."
 
