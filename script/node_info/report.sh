@@ -40,7 +40,14 @@ if [ ! -z "$PARATIME_RUNTIME_VERSION" ] ; then
   #MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.minor'`
   MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].major'`
   MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].minor'`
-  PARATIME_VERSION=$MAJOR.$MINOR
+  PATCH=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].patch'`
+  if [[ ${MINOR} == 'null' ]] ; then
+    MINOR=0
+  fi
+  if [[ ${PATCH} == 'null' ]] ; then
+    PATCH=0
+  fi
+  PARATIME_VERSION=$MAJOR.$MINOR.$PATCH
   if [[ ${PARATIME_RUNTIME_VERSION} != ${PARATIME_VERSION}* ]] ; then
     echo paratime version error ${PARATIME_VERSION}/${PARATIME_RUNTIME_VERSION}
   fi

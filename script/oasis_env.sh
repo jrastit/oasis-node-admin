@@ -243,10 +243,12 @@ case $OASIS_NODE_TYPE in
 	emerald)
 		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
+		OASIS_NODE_PARATIME="emerald"
 	;;
 	cipher-paratime)
 		PARATIME_RUNTIME_ORC="cipher-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
+		OASIS_NODE_PARATIME="cipher"
 	;;
 	*)
 		echo "config error type : $OASIS_NODE_TYPE not found"
