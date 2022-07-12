@@ -3,6 +3,11 @@ REPORT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" &> /dev/null && pwd
 
 echo $REPORT_SCRIPT_DIR
 
+ 
+cd $REPORT_SCRIPT_DIR
+
+. $REPORT_SCRIPT_DIR/../set_node.sh testnet
+
 mkdir -p /tmp/oasis/
 cp /tmp/oasis/report.txt /tmp/oasis/report_old.txt
 $REPORT_SCRIPT_DIR/report_all.sh ./node_info/check_status.sh > /tmp/oasis/report.txt

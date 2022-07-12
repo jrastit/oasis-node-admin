@@ -21,9 +21,7 @@ if [[ ${OASIS_CORE_VERSION} != ${CORE_VERSION}* ]] ; then
 fi
 
 if [ ! -z "$PARATIME_RUNTIME_VERSION" ] ; then 
-  MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.major'`
-  MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .descriptor.deployments[-1].version.minor'`
-  PARATIME_VERSION=$MAJOR.$MINOR
+  PARATIME_VERSION=$(paratime_version "$STATUS")
   if [[ ${PARATIME_RUNTIME_VERSION} != ${PARATIME_VERSION}* ]] ; then
     echo paratime version error ${PARATIME_VERSION}/${PARATIME_RUNTIME_VERSION}
     HAS_ERROR=3

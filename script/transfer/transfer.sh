@@ -1,7 +1,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-echo Amount in ROSE * 10^9
+echo Amount in ROSE \* 10^9
 read AMOUNT
 
 echo address \( oasis... \)

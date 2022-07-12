@@ -24,6 +24,18 @@ download_file () {
 	fi 
 }
 
+paratime_version () {
+  	MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].major'`
+  	MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].minor'`
+  	PATCH=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].patch'`
+  	if [[ ${MINOR} == 'null' ]] ; then
+    		MINOR=0
+  	fi
+  	if [[ ${PATCH} == 'null' ]] ; then
+    		PATCH=0
+  	fi
+  	echo $MAJOR.$MINOR.$PATCH
+}
 
 if [ -z "$OASIS_NODE_NAME" ] ; then 
 	OASIS_NODE_NAME=oasis_node
