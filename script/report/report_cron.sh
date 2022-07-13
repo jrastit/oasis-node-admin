@@ -3,30 +3,36 @@ REPORT_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" &> /dev/null && pwd
 
 echo $REPORT_SCRIPT_DIR
 
- 
 cd $REPORT_SCRIPT_DIR
 
 . $REPORT_SCRIPT_DIR/../set_node.sh testnet
 
-mkdir -p /tmp/oasis/
-cp /tmp/oasis/report.txt /tmp/oasis/report_old.txt
-$REPORT_SCRIPT_DIR/report_all.sh ./node_info/check_status.sh > /tmp/oasis/report.txt
-#cat /tmp/oasis/report.txt
+REPORT_DIR=$REPORT_SCRIPT_DIR/../../report
 
-DIFF=$(diff -u /tmp/oasis/report.txt /tmp/oasis/report_old.txt) 
+REPORT_FILE=$REPORT_DIR/report.txt
+REPORT_ERROR=$REPORT_DIR/report_error.txt
+REPORT_TMP=$REPORT_DIR/tmp1.txt
+REPORT_TMP_OLD=$REPORT_DIR/tmp2.txt
+
+mkdir -p /tmp/oasis/ $REPORT_DIR
+cp $REPORT_TMP $REPORT_TMP_OLD
+$REPORT_SCRIPT_DIR/report_all.sh ./node_info/check_status.sh > $REPORT_TMP
+#cat $REPORT_TMP
+
+DIFF=$(diff -u $REPORT_TMP $REPORT_TMP_OLD) 
 if [ "$DIFF" != "" ] 
 then
-    touch /var/www/oasis/report_error.txt
+    touch $REPORT_ERROR
     echo "Status has change"
-    echo >> /var/www/oasis/report_error.txt
-    date >> /var/www/oasis/report_error.txt
-    echo >> /var/www/oasis/report_error.txt
-    echo -e "$DIFF" >> /var/www/oasis/report_error.txt
+    echo >> $REPORT_ERROR
+    date >> $REPORT_ERROR
+    echo >> $REPORT_ERROR
+    echo -e "$DIFF" >> $REPORT_ERROR
 fi
 
-date > /var/www/oasis/report.txt
-echo >> /var/www/oasis/report.txt
-cat /tmp/oasis/report.txt >> /var/www/oasis/report.txt
+date > $REPORT_DIR/report.txt
+echo >> $REPORT_DIR/report.txt
+cat $REPORT_TMP >> $REPORT_DIR/report.txt
 
 
 
