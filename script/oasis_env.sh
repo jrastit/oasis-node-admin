@@ -232,7 +232,7 @@ SCRIPT_NODE_INFO_DIR="$SCRIPT_DIR/node_info"
 SCRIPT_NODE_ADMIN_DIR="$SCRIPT_DIR/node_admin"
 
 if [ -n "$OASIS_NODE_SSH" ]; then
-	REMOTE_CMD="ssh -4 $OASIS_NODE_SSH"
+	REMOTE_CMD="ssh -4 -o StrictHostKeyChecking=accept-new $OASIS_NODE_SSH"
 	REMOTE_CP="scp -4 "
 	REMOTE_SYNC="rsync -pvr"
 	REMOTE_DIR="$OASIS_NODE_SSH:$OASIS_NODE_DIR"
@@ -276,6 +276,7 @@ if [ -n "$PARATIME_RUNTIME_VERSION" ] ; then
 	fi
 fi
 
-
+OASIS_AGENT_DIR="$OASIS_NODE_ROOT_DIR/agent"
+GIT_URL="https://github.com/jrastit/oasis-node-admin.git"
 
 mkdir -p $LOCAL_TX
