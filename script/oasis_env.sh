@@ -28,12 +28,44 @@ paratime_version () {
   	MAJOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].major'`
   	MINOR=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].minor'`
   	PATCH=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[0].patch'`
+  	MAJOR1=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[1].major'`
+  	MINOR1=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[1].minor'`
+  	PATCH1=`echo -e "$STATUS" | jq -r '.["runtimes"] | .[] | .committee.host.versions[1].patch'`
+	if [[ ${MAJOR} == 'null' ]] ; then
+    		MAJOR=0
+  	fi
   	if [[ ${MINOR} == 'null' ]] ; then
     		MINOR=0
   	fi
   	if [[ ${PATCH} == 'null' ]] ; then
     		PATCH=0
   	fi
+	if [[ ${MAJOR1} == 'null' ]] ; then
+    		MAJOR1=0
+  	fi
+  	if [[ ${MINOR1} == 'null' ]] ; then
+    		MINOR1=0
+  	fi
+  	if [[ ${PATCH1} == 'null' ]] ; then
+    		PATCH1=0
+  	fi
+	if [[ $MAJOR1 -gt $MAJOR ]] ; then
+		SWITCH=1
+	elif [[ $MAJOR1 -eq $MAJOR ]] ; then
+		if [[ $MINOR1 -gt $MINOR ]] ; then
+			SWITCH=1
+		elif [[ $MINOR1 -eq $MINOR ]] ; then
+			if [[ $PATCH1 -gt $PATCH ]] ; then
+				SWITCH=1
+			fi
+		fi
+	fi
+
+	if [[ SWITCH -eq 1 ]] ; then
+		MAJOR=$MAJOR1
+		MINOR=$MINOR1
+		PATCH=$PATCH1
+	fi
   	echo $MAJOR.$MINOR.$PATCH
 }
 
