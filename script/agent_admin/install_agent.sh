@@ -9,12 +9,11 @@ KEY=`$REMOTE_CMD cat .ssh/id_rsa.pub`
 echo SSH Key $KEY
 $SCRIPT_DIR/report/report_all.sh "agent_admin/install_ssh_key.sh \"$KEY\""
 
-exit
-
 REMOTE_CONFIG_DIR=$OASIS_AGENT_DIR/oasis-node-admin/config
 LOCAL_CONFIG_DIR=$SCRIPT_DIR/../config
 
-$REMOTE_CMD mkdir -p REMOTE_CONFIG_DIR/{entity,network,node}
+$REMOTE_CMD mkdir -p REMOTE_CONFIG_DIR/{entity,network,node,api}
+log_cmd $REMOTE_SYNC $LOCAL_CONFIG_DIR/api/* $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/api
 
 for NETWORK_DIR in $LOCAL_CONFIG_DIR/entity/*; do
 	if [ -d $NETWORK_DIR ]; then
