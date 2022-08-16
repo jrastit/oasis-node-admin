@@ -8,5 +8,5 @@ $REMOTE_CMD_ADMIN apt-get update
 echo $REMOTE_CMD_ADMIN apt-get dist-upgrade
 $REMOTE_CMD_ADMIN apt-get dist-upgrade
 
-echo $REMOTE_CMD_ADMIN apt-get install vim
-$REMOTE_CMD_ADMIN apt-get install vim
+echo $REMOTE_CMD_ADMIN apt-get -y install vim xfsprogs wget rsync
+$REMOTE_CMD_ADMIN apt-get install -y vim xfsprogs wget rsync

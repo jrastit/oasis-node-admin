@@ -25,15 +25,18 @@ case $OASIS_NODE_TYPE in
 	validator)
 		echo "config validator"
 	;;
+	nonvalidator)
+		echo "config nonvalidator"
+	;;
 	emerald)
 		echo "config emerald"
 		PARATIME_INDEX_IN_DOC=3
-		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v"
+		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v" 
 	;;
 	cipher-paratime)
 		echo "config cipher"
 		PARATIME_INDEX_IN_DOC=2
-		PARATIME_URL_ROOT="https://github.com/oasisprotocol/cipher-paratime/releases/tag/v"
+		PARATIME_URL_ROOT="https://github.com/oasisprotocol/cipher-paratime/releases/tag/v" 
 		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 	;;
 	*)
@@ -42,14 +45,9 @@ case $OASIS_NODE_TYPE in
 esac
 if [[ -n "$PARATIME_INDEX_IN_DOC" ]]; then
 	NETWORK_PARAMETER_PARATIME_CORE_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $OASIS_CORE_URL_ROOT | head -n "$PARATIME_INDEX_IN_DOC" | tail -n 1 | awk -F "$OASIS_CORE_URL_ROOT|)" '{print $2}'`
+	NETWORK_PARAMETER_RUNTIME_IDENTIFIER=`echo -e "$NETWORK_PARAMETER" | grep "Runtime identifier" -A 1 | grep '\`' | head -n "$(expr $PARATIME_INDEX_IN_DOC - 1)" | tail -n 1 | awk -F "\\\`" '{print $2}'`
 fi
 if [[ -n "$PARATIME_URL_ROOT" ]]; then
 	NETWORK_PARAMETER_PARATIME_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $PARATIME_URL_ROOT | tail -n 1 | awk -F "$PARATIME_URL_ROOT|)" '{print $2}'`
 fi
 
-echo core $NETWORK_PARAMETER_CORE_VERSION
-echo genesis $NETWORK_PARAMETER_GENESIS
-echo seed $NETWORK_PARAMETER_SEED
-
-echo paratime $NETWORK_PARAMETER_PARATIME_CORE_VERSION $NETWORK_PARAMETER_PARATIME_VERSION
-echo IAS $NETWORK_PARAMETER_IAS

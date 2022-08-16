@@ -284,6 +284,8 @@ else
 fi
 
 case $OASIS_NODE_TYPE in
+	nonvalidator)	
+	;;
 	validator)	
 	;;
 	emerald)

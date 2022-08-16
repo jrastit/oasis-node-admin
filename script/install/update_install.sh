@@ -3,6 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
 $SCRIPT_DIR/config/config_auto.sh
+$SCRIPT_DIR/config/config_confirm.sh
 
 . $SCRIPT_DIR/oasis_env.sh
 if [[ "$OASIS_CORE_VERSION" != "22."* ]]; then
