@@ -283,19 +283,26 @@ else
 	REMOTE_CMD_ADMIN="sudo"
 fi
 
+OASIS_NODE_REGISTER="false"
 case $OASIS_NODE_TYPE in
-	nonvalidator)	
+	nonvalidator)
+			
 	;;
 	validator)	
+		OASIS_NODE_REGISTER="true"
 	;;
 	emerald)
+		OASIS_NODE_REGISTER="true"
 		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/emerald-paratime.orc"
 		OASIS_NODE_PARATIME="emerald"
 	;;
 	cipher-paratime)
+		OASIS_NODE_REGISTER="true"
 		PARATIME_RUNTIME_ORC="cipher-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/cipher-paratime.orc"
 		OASIS_NODE_PARATIME="cipher"
 	;;
 	*)

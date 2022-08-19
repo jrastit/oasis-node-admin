@@ -7,7 +7,7 @@ log_cmd $REMOTE_CMD "cd $OASIS_AGENT_DIR ; [ -d oasis-node-admin ] && ( cd oasis
 log_cmd $REMOTE_CMD "[ -f .ssh/id_rsa.pub ] || ssh-keygen -f .ssh/id_rsa -N \"\""
 KEY=`$REMOTE_CMD cat .ssh/id_rsa.pub`
 echo SSH Key $KEY
-$SCRIPT_DIR/report/report_all.sh "agent_admin/install_ssh_key.sh \"$KEY\""
+$SCRIPT_DIR/report/run_all.sh "agent_admin/install_ssh_key.sh \"$KEY\""
 
 REMOTE_CONFIG_DIR=$OASIS_AGENT_DIR/oasis-node-admin/config
 LOCAL_CONFIG_DIR=$SCRIPT_DIR/../config

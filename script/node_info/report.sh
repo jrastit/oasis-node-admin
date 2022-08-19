@@ -50,17 +50,20 @@ fi
 #displaytime LATEST_TIME_DIFF
 #echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xargs date -d 2>/dev/null
 #echo Last Registration
-LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null`
-LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
-if [[ ${LAST_REGISTRATION_DIFF} -gt "4000" ]] ; then
-  echo last registration error
+if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
+	LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null`
+	LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
+	if [[ ${LAST_REGISTRATION_DIFF} -gt "4000" ]] ; then
+	  echo last registration error
+	fi
+	REGISTRATION="- `displaytime $LAST_REGISTRATION_DIFF`"
 fi
 #displaytime LAST_REGISTRATION_DIFF
 #echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date -d 2>/dev/null
 if [ -z "$PARATIME_RUNTIME_VERSION" ] ; then 
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - `displaytime $LATEST_TIME_DIFF` - `displaytime $LAST_REGISTRATION_DIFF`
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} - `displaytime $LATEST_TIME_DIFF` $REGISTRATION
 else
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` - `displaytime $LAST_REGISTRATION_DIFF`
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` $REGISTRATION
 fi
 
 $SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."

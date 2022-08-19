@@ -42,11 +42,24 @@ You should obtain something like:
 >CUSTOM_PARATIME_RUNTIME_VERSION="6.0.0-rc"  
 
 
-### Admin host if needed for cipher SGX (used for Microsoft azure sgx)
+### Admin host if needed 
 ./script/admin/install_system.sh  
-./script/admin/install_sgx.sh  
-./script/admin/add_oasis_user.sh  
 ./script/admin/install_prerequisit.sh  
+#for cipher SGX (used for Microsoft azure sgx)
+./script/admin/install_sgx.sh  
+
+
+### install user
+./script/admin/add_oasis_user.sh  
+
+### Setup disk
+#Retrive information
+./script/admin/disk_info.sh
+#Create partition if needed (Cloud network disk)
+./script/admin/disk_create_partition.sh
+#Add the partition to fstab
+./script/admin/add_oasis_fstab.sh
+#reboot the system
 ./script/admin/reboot_system.sh  
 
 ### Create the need file for the node
@@ -67,7 +80,7 @@ You should obtain something like:
 `./install/install_paratime_emerald.sh`  
 
 #### Create the configuration file for your node
-`./node_admin/config_node_emerald.sh`  
+`./node_admin/config_node.sh`  
 
 ### Start the node
 

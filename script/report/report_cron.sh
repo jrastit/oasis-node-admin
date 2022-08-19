@@ -19,7 +19,7 @@ REPORT_TMP_OLD=$REPORT_DIR/tmp2.txt
 
 mkdir -p /tmp/oasis/ $REPORT_DIR
 cp $REPORT_TMP $REPORT_TMP_OLD
-$REPORT_SCRIPT_DIR/report_all.sh ./node_info/check_status.sh > $REPORT_TMP
+$REPORT_SCRIPT_DIR/run_all.sh ./node_info/check_status.sh > $REPORT_TMP
 
 #cat $REPORT_TMP
 
@@ -35,7 +35,7 @@ then
 fi
 
 cp $REPORT_VERSION_FILE $REPORT_VERSION_FILE_OLD
-#$REPORT_SCRIPT_DIR/report_all.sh ./config/config_auto.sh > $REPORT_VERSION_FILE
+#$REPORT_SCRIPT_DIR/run_all.sh ./config/config_auto.sh > $REPORT_VERSION_FILE
 #DIFF=$(diff -u $REPORT_VERSION_FILE_OLD $REPORT_VERSION_FILE)
 #if [ "$DIFF" != "" ]
 #then
