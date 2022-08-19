@@ -5,7 +5,7 @@ echo $REPORT_SCRIPT_DIR
 
 cd $REPORT_SCRIPT_DIR
 
-. $REPORT_SCRIPT_DIR/../set_node.sh testnet
+. $REPORT_SCRIPT_DIR/../set_node.sh mainnet
 
 REPORT_DIR=$REPORT_SCRIPT_DIR/../../report
 
@@ -18,7 +18,7 @@ REPORT_TMP=$REPORT_DIR/tmp1.txt
 REPORT_TMP_OLD=$REPORT_DIR/tmp2.txt
 
 mkdir -p /tmp/oasis/ $REPORT_DIR
-if [[ -f $REPORT_TMP ]]
+if [[ -f "$REPORT_TMP" ]]
 then
 	cp $REPORT_TMP $REPORT_TMP_OLD
 else
