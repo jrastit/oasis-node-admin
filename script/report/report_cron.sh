@@ -18,7 +18,14 @@ REPORT_TMP=$REPORT_DIR/tmp1.txt
 REPORT_TMP_OLD=$REPORT_DIR/tmp2.txt
 
 mkdir -p /tmp/oasis/ $REPORT_DIR
-cp $REPORT_TMP $REPORT_TMP_OLD
+if [[ -f $REPORT_TMP ]]
+then
+	cp $REPORT_TMP $REPORT_TMP_OLD
+else
+	touch $REPORT_TMP_OLD
+fi
+
+
 $REPORT_SCRIPT_DIR/run_all.sh ./node_info/check_status.sh > $REPORT_TMP
 
 #cat $REPORT_TMP

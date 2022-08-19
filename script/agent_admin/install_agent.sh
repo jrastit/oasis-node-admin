@@ -13,7 +13,10 @@ REMOTE_CONFIG_DIR=$OASIS_AGENT_DIR/oasis-node-admin/config
 LOCAL_CONFIG_DIR=$SCRIPT_DIR/../config
 
 $REMOTE_CMD mkdir -p REMOTE_CONFIG_DIR/{entity,network,node,api}
-log_cmd $REMOTE_SYNC $LOCAL_CONFIG_DIR/api/* $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/api
+
+$REMOTE_SYNC --verbose -av -f"+ */" -f"- *" $LOCAL_CONFIG_DIR $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR
+
+log_cmd $REMOTE_SYNC $LOCAL_CONFIG_DIR/api/* $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/api/
 
 for NETWORK_DIR in $LOCAL_CONFIG_DIR/entity/*; do
 	if [ -d $NETWORK_DIR ]; then
