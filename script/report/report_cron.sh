@@ -41,7 +41,13 @@ then
 	$REPORT_SCRIPT_DIR/../api/ifttt.sh
 fi
 
-cp $REPORT_VERSION_FILE $REPORT_VERSION_FILE_OLD
+if [[ -f "$REPORT_VERSION_FILE" ]]
+then
+	cp $REPORT_VERSION_FILE $REPORT_VERSION_FILE_OLD
+else
+	touch $REPORT_VERSION_FILE_OLD
+fi
+
 #$REPORT_SCRIPT_DIR/run_all.sh ./config/config_auto.sh > $REPORT_VERSION_FILE
 #DIFF=$(diff -u $REPORT_VERSION_FILE_OLD $REPORT_VERSION_FILE)
 #if [ "$DIFF" != "" ]
