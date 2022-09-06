@@ -31,7 +31,7 @@ fi
 
 LATEST_TIME=`echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xargs date +"%s" -d 2>/dev/null`
 LATEST_TIME_DIFF=$((`date +"%s"` - $LATEST_TIME))
-if [[ ${LATEST_TIME_DIFF} -gt "60" ]] ; then
+if [[ ${LATEST_TIME_DIFF} -gt "120" ]] ; then
   echo latest time error
   HAS_ERROR=4
 fi
