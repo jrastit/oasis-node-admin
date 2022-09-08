@@ -10,6 +10,7 @@ log:
     tendermint: info
     tendermint/context: error
   format: JSON
+  file: $OASIS_NODE_LOG_FILE
 
 genesis:
   file: $OASIS_NODE_GENESIS

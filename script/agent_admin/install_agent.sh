@@ -14,7 +14,7 @@ LOCAL_CONFIG_DIR=$SCRIPT_DIR/../config
 
 $REMOTE_CMD mkdir -p REMOTE_CONFIG_DIR/{entity,network,node,api}
 
-$REMOTE_SYNC --verbose -av -f"+ */" -f"- *" $LOCAL_CONFIG_DIR $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR
+log_cmd $REMOTE_SYNC --delete --existing --ignore-existing $LOCAL_CONFIG_DIR/ $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/
 
 log_cmd $REMOTE_SYNC $LOCAL_CONFIG_DIR/api/* $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/api/
 

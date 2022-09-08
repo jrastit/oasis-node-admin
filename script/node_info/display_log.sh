@@ -2,7 +2,4 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-$SCRIPT_DIR/cmd/oasis_stop_wait.sh
-sleep 1
-$SCRIPT_DIR/cmd/oasis_start_screen.sh
-
+$REMOTE_CMD "cat $OASIS_NODE_LOG_FILE"
