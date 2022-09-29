@@ -58,12 +58,16 @@ if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
 	fi
 	REGISTRATION="- `displaytime $LAST_REGISTRATION_DIFF`"
 fi
+IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
+if [[ "$IS_VALIDATOR" == "true" ]] ; then
+	VALIDATOR=' Validator'
+fi
 #displaytime LAST_REGISTRATION_DIFF
 #echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date -d 2>/dev/null
 if [ -z "$PARATIME_RUNTIME_VERSION" ] ; then 
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - `displaytime $LATEST_TIME_DIFF` $REGISTRATION
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} - `displaytime $LATEST_TIME_DIFF` $REGISTRATION $VALIDATOR
 else
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` $REGISTRATION
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` $REGISTRATION $VALIDATOR
 fi
 
 $SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."
