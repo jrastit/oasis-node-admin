@@ -33,6 +33,21 @@ EOF
 
 fi
 
+echo "Custom error check? y/N"
+read READ_VALUE
+
+if [ "$READ_VALUE" = "y" ] ; then
+
+config_value "LATEST_TIME_ERROR ex: 120" "$LATEST_TIME_ERROR"
+CONFIG_LATEST_TIME_ERROR="$CONFIG_VALUE"
+
+mkdir -p $CONFIG_TYPE_DIR
+cat >>$CONFIG_TYPE_DIR/type_config.sh << EOF
+CUSTOM_LATEST_TIME_ERROR="$CONFIG_LATEST_TIME_ERROR"
+EOF
+
+fi
+
 echo "Is paratime? y/N"
 read READ_VALUE
 

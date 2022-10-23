@@ -3,11 +3,11 @@
 case $OASIS_NODE_NETWORK in
 	mainnet)
 		echo "Mainnet"
-		NETWORK_PARAMETER=`wget -O - https://raw.githubusercontent.com/oasisprotocol/docs/main/docs/general/oasis-network/network-parameters.md 2>/dev/null` 
+		NETWORK_PARAMETER=`wget -O - https://raw.githubusercontent.com/oasisprotocol/docs/main/docs/node/mainnet/README.md 2>/dev/null` 
 	;;
 	testnet)
 		echo "Testnet"
-		NETWORK_PARAMETER=`wget -O - https://raw.githubusercontent.com/oasisprotocol/docs/main/docs/general/foundation/testnet/README.md 2>/dev/null` 
+		NETWORK_PARAMETER=`wget -O - https://raw.githubusercontent.com/oasisprotocol/docs/main/docs/node/testnet/README.md 2>/dev/null` 
 	;;
 	*)	
 		echo "config error type : $OASIS_NODE_NETWORK not found"
