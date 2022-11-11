@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
 log_cmd $REMOTE_CMD mkdir -p $OASIS_AGENT_DIR
-log_cmd $REMOTE_CMD "cd $OASIS_AGENT_DIR ; [ -d oasis-node-admin ] && ( cd oasis-node-admin && git pull ) || echo git clone $GIT_URL"
+log_cmd $REMOTE_CMD "cd $OASIS_AGENT_DIR ; [ -d oasis-node-admin ] && ( cd oasis-node-admin && git pull ) || git clone $GIT_URL"
 log_cmd $REMOTE_CMD "[ -f .ssh/id_rsa.pub ] || ssh-keygen -f .ssh/id_rsa -N \"\""
 KEY=`$REMOTE_CMD cat .ssh/id_rsa.pub`
 echo SSH Key $KEY
@@ -12,7 +12,7 @@ $SCRIPT_DIR/report/run_all.sh "agent_admin/install_ssh_key.sh \"$KEY\""
 REMOTE_CONFIG_DIR=$OASIS_AGENT_DIR/oasis-node-admin/config
 LOCAL_CONFIG_DIR=$SCRIPT_DIR/../config
 
-$REMOTE_CMD mkdir -p REMOTE_CONFIG_DIR/{entity,network,node,api}
+$REMOTE_CMD mkdir -p $REMOTE_CONFIG_DIR/{entity,network,node,api}
 
 log_cmd $REMOTE_SYNC --delete --existing --ignore-existing $LOCAL_CONFIG_DIR/ $OASIS_NODE_SSH:$REMOTE_CONFIG_DIR/
 
