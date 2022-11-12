@@ -46,7 +46,12 @@ if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
 fi
 
 if [[ "$HAS_ERROR" == "0" ]]; then
-  echo node registered
+	echo node registered
+fi
+
+IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
+if [[ "$IS_VALIDATOR" == "true" ]] ; then
+	echo Validator
 fi
 
 exit $HAS_ERROR
