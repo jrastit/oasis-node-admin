@@ -49,10 +49,10 @@ if [[ "$HAS_ERROR" == "0" ]]; then
 	echo node registered
 fi
 
-IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
-if [[ "$IS_VALIDATOR" == "true" ]] ; then
-	echo Validator
-fi
+#IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
+#if [[ "$IS_VALIDATOR" == "true" ]] ; then
+#	echo Validator
+#fi
 
 exit $HAS_ERROR
 
