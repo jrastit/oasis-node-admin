@@ -267,6 +267,9 @@ OASIS_NODE_BIN="$SSHCMD $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node"
 OASIS_NODE_CLI="$SSHCMD $OASIS_NODE_DIR/cli/cli"
 OASIS_NODE_BIN_SCREEN="$SSHCMD screen -S $OASIS_NODE_NAME -dm $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node"
 OASIS_NODE_SCREEN="$SSHCMD -t screen -r $OASIS_NODE_NAME"
+OASIS_NODE_RESTART_SCREEN="$SSHCMD screen -S restart_$OASIS_NODE_NAME -dm \"$OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node control -a $OASIS_NODE_SOCK shutdown --wait;sleep 10;screen -S $OASIS_NODE_NAME -dm $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node\""
+
+
 
 SCRIPT_ENTITY_INFO_DIR="$SCRIPT_DIR/entity_info"
 SCRIPT_ENTITY_ADMIN_DIR="$SCRIPT_DIR/entity_admin"
@@ -311,6 +314,13 @@ case $OASIS_NODE_TYPE in
 		PARATIME_RUNTIME_ORC="cipher-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/cipher-paratime.orc"
+		OASIS_NODE_PARATIME="cipher"
+	;;
+	sapphire)
+		OASIS_NODE_REGISTER="true"
+		PARATIME_RUNTIME_ORC="sapphire-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/sapphire-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/sapphire-paratime.orc"
 		OASIS_NODE_PARATIME="cipher"
 	;;
 	*)

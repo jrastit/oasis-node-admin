@@ -20,6 +20,10 @@ if [[ "$OASIS_CORE_VERSION" == "22."* ]]; then
 			echo "config cipher"
 			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
 		;;
+		sapphire)
+			echo "config sapphire"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
+		;;
 		*)
 			echo "config error type : $OASIS_NODE_TYPE not found"
 		;;

@@ -39,6 +39,12 @@ case $OASIS_NODE_TYPE in
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/cipher-paratime/releases/tag/v" 
 		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 	;;
+	sapphire)
+		echo "config sapphire"
+		PARATIME_INDEX_IN_DOC=4
+		PARATIME_URL_ROOT="https://github.com/oasisprotocol/sapphire-paratime/releases/tag/v" 
+		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
+	;;
 	*)
 		echo "config error type : $OASIS_NODE_TYPE not found"
 	;;

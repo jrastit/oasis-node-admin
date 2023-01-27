@@ -17,7 +17,7 @@ $SCRIPT_DIR/system_admin/disk_create_partition.sh
 echo Update fstab
 $SCRIPT_DIR/system_admin/add_oasis_fstab.sh
 echo Install Logrotate
-$SCRIPT_DIR/system_admin/instal_logrotate.sh
+$SCRIPT_DIR/system_admin/install_logrotate.sh
 
 
 
