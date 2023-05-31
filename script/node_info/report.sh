@@ -47,16 +47,23 @@ LATEST_TIME_DIFF=$((`date +"%s"` - $LATEST_TIME))
 if [[ ${LATEST_TIME_DIFF} -gt "$LATEST_TIME_ERROR" ]] ; then
   echo latest time error
 fi
+DISPLAY_TIME="- `displaytime $LATEST_TIME_DIFF`"
+if [[ ${LASTEST_TIME_DIFF} -gt "60000000000" ]] ; then
+  DISPLAY_TIME="- not started" 
+fi
 #displaytime LATEST_TIME_DIFF
 #echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xargs date -d 2>/dev/null
 #echo Last Registration
 if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
-	LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null`
+	LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null` 
 	LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
-	if [[ ${LAST_REGISTRATION_DIFF} -gt "4000" ]] ; then
+	if [[ ${LAST_REGISTRATION_DIFF} -gt "$REGISTER_TIME_ERROR" ]] ; then
 	  echo last registration error
 	fi
 	REGISTRATION="- `displaytime $LAST_REGISTRATION_DIFF`"
+	if [[ ${LAST_REGISTRATION_DIFF} -gt "60000000000" ]] ; then
+	  REGISTRATION="- not started" 
+	fi
 fi
 IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
 if [[ "$IS_VALIDATOR" == "true" ]] ; then
@@ -65,9 +72,9 @@ fi
 #displaytime LAST_REGISTRATION_DIFF
 #echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date -d 2>/dev/null
 if [ -z "$PARATIME_RUNTIME_VERSION" ] ; then 
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - `displaytime $LATEST_TIME_DIFF` $REGISTRATION $VALIDATOR
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} $DISPLAY_TIME $REGISTRATION $VALIDATOR
 else
-  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION - `displaytime $LATEST_TIME_DIFF` $REGISTRATION $VALIDATOR
+  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION $DISPLAY_TIME $REGISTRATION $VALIDATOR
 fi
 
 $SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."

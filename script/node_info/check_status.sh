@@ -39,7 +39,7 @@ fi
 if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
 	LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null`
 	LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
-	if [[ ${LAST_REGISTRATION_DIFF} -gt "7200" ]] ; then
+	if [[ ${LAST_REGISTRATION_DIFF} -gt "$REGISTER_TIME_ERROR" ]] ; then
 	  echo last registration error
 	  HAS_ERROR=5
 	fi
