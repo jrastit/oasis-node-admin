@@ -23,7 +23,7 @@ $SCRIPT_DIR/oasis_local.sh registry entity gen_register \
 	--signer.backend file \
 	--signer.dir $ENTITY_DIR \
 	--transaction.file $OUTPUT_TX \
-	--transaction.fee.gas 7000 \
+	--transaction.fee.gas 10000 \
 	--transaction.fee.amount 0 \
 	--transaction.nonce $NONCE
 

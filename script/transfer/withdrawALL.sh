@@ -3,6 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 NONCE=`$SCRIPT_ENTITY_INFO_DIR/nonce.sh`
 echo nonce $NONCE
+sleep 5
 TX=withdraw$(date +%s).json
 OUTPUT_TX=$LOCAL_TX/$TX
 AVAILABLE=`$SCRIPT_ENTITY_INFO_DIR/get_stake_available.sh`
