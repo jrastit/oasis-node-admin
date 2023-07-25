@@ -18,6 +18,6 @@ then
 	$REMOTE_CMD_ADMIN "mkdir /home/oasis/.ssh"
 	$REMOTE_CMD_ADMIN "chown oasis.oasis /home/oasis/.ssh"
 	$REMOTE_CMD_ADMIN "echo \"$OASIS_NODE_SSH_ID\" | sudo tee /home/oasis/.ssh/authorized_keys"
-	$REMOTE_CMD_ADMIN "chown oasis.oasis /home/oasis/.ssh/authorized_keys"
+	$REMOTE_CMD_ADMIN "chown oasis:oasis /home/oasis/.ssh/authorized_keys"
 fi
 

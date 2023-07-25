@@ -20,6 +20,7 @@ STATUS=`$SCRIPT_NODE_INFO_DIR/status.sh`
 RESULT=$?
 if [[ RESULT -ne 0 ]] ; then
   echo node error
+  $SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."
   exit 1
 fi
 
