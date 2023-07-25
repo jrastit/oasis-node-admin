@@ -12,6 +12,10 @@ if [[ "$OASIS_CORE_VERSION" == "22."* ]]; then
 			echo "config nonvalidator"
 			$SCRIPT_NODE_ADMIN_DIR/config_node_nonvalidator.sh
 		;;
+		validator_emerald)
+			echo "config validator with emerald"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_validator_paratime.sh
+		;;
 		emerald)
 			echo "config emerald"
 			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh

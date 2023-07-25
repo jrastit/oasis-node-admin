@@ -28,6 +28,11 @@ case $OASIS_NODE_TYPE in
 	nonvalidator)
 		echo "config nonvalidator"
 	;;
+	validator_emerald)
+		echo "config validator with emerald"
+		PARATIME_INDEX_IN_DOC=3
+		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v" 
+	;;
 	emerald)
 		echo "config emerald"
 		PARATIME_INDEX_IN_DOC=3

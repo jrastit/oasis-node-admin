@@ -305,6 +305,13 @@ case $OASIS_NODE_TYPE in
 	validator)	
 		OASIS_NODE_REGISTER="true"
 	;;
+	validator_emerald)
+		OASIS_NODE_REGISTER="true"
+		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
+		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/emerald-paratime.orc"
+		OASIS_NODE_PARATIME="validator_emerald"
+	;;
 	emerald)
 		OASIS_NODE_REGISTER="true"
 		PARATIME_RUNTIME_ORC="emerald-paratime.orc"

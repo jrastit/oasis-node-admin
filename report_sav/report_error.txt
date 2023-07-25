@@ -1,0 +1,55 @@
+lundi 1 août 2022, 14:19:59 (UTC+0200)
+--- /home/oasis/oasis-node-admin/script/report/../../report/tmp1.txt	2022-08-01 14:19:59.515962024 +0200
++++ /home/oasis/oasis-node-admin/script/report/../../report/tmp2.txt	2022-08-01 14:19:41.439715143 +0200
+@@ -5,7 +5,7 @@
+ node registered
+ 
+ NODE mainnet
+-last registration error
++node error
+ 
+ NODE mainnet2
+ node registered
+
+
+lundi 1 août 2022, 13:19:32 (UTC+0200)
+--- /home/oasis/oasis-node-admin/script/report/../../report/tmp1.txt	2022-08-01 13:19:32.418808760 +0200
++++ /home/oasis/oasis-node-admin/script/report/../../report/tmp2.txt	2022-08-01 13:19:15.522581146 +0200
+@@ -5,7 +5,7 @@
+ node registered
+ 
+ NODE mainnet
+-node error
++last registration error
+ 
+ NODE mainnet2
+ node registered
+
+
+lundi 1 août 2022, 13:15:31 (UTC+0200)
+--- /home/oasis/oasis-node-admin/script/report/../../report/tmp1.txt	2022-08-01 13:15:31.467563724 +0200
++++ /home/oasis/oasis-node-admin/script/report/../../report/tmp2.txt	2022-08-01 13:15:13.907327291 +0200
+@@ -20,5 +20,3 @@
+ node registered
+ 
+ NODE testnet_emerald
+-node registered
+-
+
+
+lundi 1 août 2022, 13:14:54 (UTC+0200)
+test
+
+
+lundi 1 août 2022, 13:14:44 (UTC+0200)
+test
+
+lundi 1 août 2022, 13:14:16 (UTC+0200)
+test
+lundi 1 août 2022, 13:14:02 (UTC+0200)
+test
+lundi 1 août 2022, 13:13:48 (UTC+0200)
+test
+lundi 1 août 2022, 13:13:36 (UTC+0200)
+test
+
