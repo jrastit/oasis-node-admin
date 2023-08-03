@@ -12,7 +12,7 @@ ls $CONFIG_ENTITY_DIR
 config_value "OASIS_NODE_ENTITY ex: my_entity" "$OASIS_NODE_ENTITY"
 CONFIG_OASIS_NODE_ENTITY="$CONFIG_VALUE"
 
-config_value "OASIS_NODE_TYPE ex: validator nonvalidator cipher-paratime emerald validator_emerald" "$OASIS_NODE_TYPE"
+config_value "OASIS_NODE_TYPE ex: validator nonvalidator cipher emerald sapphire" "$OASIS_NODE_TYPE"
 CONFIG_OASIS_NODE_TYPE="$CONFIG_VALUE"
 
 config_value "OASIS_NODE_SSH_NAME ex: oasis" "$OASIS_NODE_SSH_NAME"

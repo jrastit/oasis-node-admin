@@ -119,9 +119,6 @@ CONFIG_ENTITY_DIR=$SCRIPT_DIR/../config/entity/$OASIS_NODE_NETWORK
 CONFIG_NETWORK_DIR=$SCRIPT_DIR/../config/network/$OASIS_NODE_NETWORK
 . $CONFIG_NETWORK_DIR/network_config.sh
 
-CONFIG_TYPE_DIR=$SCRIPT_DIR/../config/network/$OASIS_NODE_NETWORK/$OASIS_NODE_TYPE
-. $CONFIG_TYPE_DIR/type_config.sh
-
 if [ -n "$CUSTOM_OASIS_NODE_ROOT_DIR" ] ; then 
 	OASIS_NODE_ROOT_DIR=$CUSTOM_OASIS_NODE_ROOT_DIR
 fi
@@ -206,47 +203,6 @@ if [ -n "$CUSTOM_OASIS_SEED_NODE" ] ; then
 	OASIS_SEED_NODE=$CUSTOM_OASIS_SEED_NODE
 fi
 
-#paratime
-
-if [ -n "$CUSTOM_OASIS_PARATIME_CORE_VERSION" ] ; then 
-	OASIS_CORE_VERSION=$CUSTOM_OASIS_PARATIME_CORE_VERSION
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_IDENTIFIER" ] ; then 
-	PARATIME_RUNTIME_IDENTIFIER=$CUSTOM_PARATIME_RUNTIME_IDENTIFIER
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION" ] ; then 
-	PARATIME_RUNTIME_VERSION=$CUSTOM_PARATIME_RUNTIME_VERSION
-	PARATIME_RUNTIME_SGSX="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sgxs"
-	PARATIME_RUNTIME_SIG="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/cipher-paratime.sig"
-	PARATIME_RUNTIME_EMERALD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$CUSTOM_PARATIME_RUNTIME_VERSION/emerald-paratime"
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_VERSION_OLD" ] ; then
-	PARATIME_RUNTIME_VERSION_OLD=$CUSTOM_PARATIME_RUNTIME_VERSION_OLD
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_SGSX" ] ; then 
-	PARATIME_RUNTIME_SGSX=$CUSTOM_PARATIME_RUNTIME_SGSX
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_SIG" ] ; then 
-	PARATIME_RUNTIME_SIG=$CUSTOM_PARATIME_RUNTIME_SIG
-fi
-
-if [ -n "$CUSTOM_PARATIME_RUNTIME_IAS" ] ; then 
-	PARATIME_RUNTIME_IAS=$CUSTOM_PARATIME_RUNTIME_IAS
-fi
-
-if [ -n "$CUSTOM_PARATIME_WORKER_CLIENT_PORT" ] ; then 
-	PARATIME_WORKER_CLIENT_PORT=$CUSTOM_PARATIME_WORKER_CLIENT_PORT
-fi
-
-if [ -n "$CUSTOM_PARATIME_WORKER_P2P_PORT" ] ; then 
-	PARATIME_WORKER_P2P_PORT=$CUSTOM_PARATIME_WORKER_P2P_PORT
-fi
-
 
 OASIS_CORE_DIR="oasis_core_${OASIS_CORE_VERSION}_linux_amd64"
 OASIS_CORE_TAR="${OASIS_CORE_DIR}.tar.gz"
@@ -298,54 +254,7 @@ else
 fi
 
 OASIS_NODE_REGISTER="false"
-case $OASIS_NODE_TYPE in
-	nonvalidator)
-			
-	;;
-	validator)	
-		OASIS_NODE_REGISTER="true"
-	;;
-	validator_emerald)
-		OASIS_NODE_REGISTER="true"
-		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/emerald-paratime.orc"
-		OASIS_NODE_PARATIME="validator_emerald"
-	;;
-	emerald)
-		OASIS_NODE_REGISTER="true"
-		PARATIME_RUNTIME_ORC="emerald-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/emerald-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/emerald-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/emerald-paratime.orc"
-		OASIS_NODE_PARATIME="emerald"
-	;;
-	cipher-paratime)
-		OASIS_NODE_REGISTER="true"
-		PARATIME_RUNTIME_ORC="cipher-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/cipher-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/cipher-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/cipher-paratime.orc"
-		OASIS_NODE_PARATIME="cipher"
-	;;
-	sapphire)
-		OASIS_NODE_REGISTER="true"
-		PARATIME_RUNTIME_ORC="sapphire-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/sapphire-paratime.orc"
-		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/sapphire-paratime.orc"
-		OASIS_NODE_PARATIME="cipher"
-	;;
-	*)
-		echo "config error type : $OASIS_NODE_TYPE not found"
-	;;
-esac
 
-if [ -n "$PARATIME_RUNTIME_VERSION" ] ; then 
-	PARATIME_RUNTIME_DIR_NAME=$OASIS_NODE_TYPE
-	PARATIME_RUNTIME_DIR=$LOCAL_DIR/paratime/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION
-	PARATIME_RUNTIME_REMOTE_DIR=$OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION
-	if [ -n "$PARATIME_RUNTIME_VERSION_OLD" ] ; then 
-		PARATIME_RUNTIME_OLD_REMOTE_DIR=$OASIS_NODE_RUNTIME_PATH/$PARATIME_RUNTIME_DIR_NAME/$PARATIME_RUNTIME_VERSION_OLD
-	fi
-fi
 
 OASIS_AGENT_DIR="$OASIS_NODE_ROOT_DIR/agent"
 GIT_URL="https://github.com/jrastit/oasis-node-admin.git"

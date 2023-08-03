@@ -19,6 +19,11 @@ then
 	fi
 fi
 
+all=($OASIS_NODE_TYPE)
+for NODE_TYPE in "${all[@]}"; do
+  . $SCRIPT_DIR/oasis_env.sh
+  load_paratime $NODE_TYPE
+
 DIFF=$(diff $CONFIG_TYPE_DIR/type_config.sh $CONFIG_TYPE_DIR/type_config_2.sh)
 if [ "$DIFF" != "" ] 
 then
@@ -35,3 +40,5 @@ then
 	    	cp $CONFIG_TYPE_DIR/type_config_2.sh $CONFIG_TYPE_DIR/type_config.sh
 	fi
 fi
+
+done

@@ -21,24 +21,19 @@ NETWORK_PARAMETER_CORE_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $OASIS_CORE_
 NETWORK_PARAMETER_GENESIS=`echo -e "$NETWORK_PARAMETER" | grep "genesis\.json" | awk -F "\\\\\\\\(|)" '{print $2}'`
 NETWORK_PARAMETER_SEED=`echo -e "$NETWORK_PARAMETER" | grep "Oasis seed node address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 
-case $OASIS_NODE_TYPE in
+case $OASIS_TYPE in
 	validator)
 		echo "config validator"
 	;;
 	nonvalidator)
 		echo "config nonvalidator"
 	;;
-	validator_emerald)
-		echo "config validator with emerald"
-		PARATIME_INDEX_IN_DOC=3
-		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v" 
-	;;
 	emerald)
 		echo "config emerald"
 		PARATIME_INDEX_IN_DOC=3
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v" 
 	;;
-	cipher-paratime)
+	cipher)
 		echo "config cipher"
 		PARATIME_INDEX_IN_DOC=2
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/cipher-paratime/releases/tag/v" 

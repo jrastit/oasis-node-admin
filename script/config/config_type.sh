@@ -1,6 +1,12 @@
 #/bin/bash
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
+. $SCRIPT_DIR/paratime_env.sh
+
+all=($OASIS_NODE_TYPE)
+for NODE_TYPE in "${all[@]}"; do
+  load_paratime $NODE_TYPE
+
 
 CONFIG_VALUE=""
 
@@ -95,3 +101,4 @@ fi
 cat $CONFIG_TYPE_DIR/type_config.sh
 
 
+done

@@ -2,6 +2,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
+NODE_TYPE="validator"
 . $SCRIPT_DIR/chain_info/network_parameter.sh
 
 config_auto_value () {
@@ -42,7 +43,12 @@ EOF
 #echo "Network config"
 #cat $CONFIG_NETWORK_DIR/network_config_2.sh
 
-. $SCRIPT_DIR/oasis_env.sh
+all=($OASIS_NODE_TYPE)
+for NODE_TYPE in "${all[@]}"; do
+  . $SCRIPT_DIR/oasis_env.sh
+  load_paratime $NODE_TYPE
+  
+
 
 config_auto_value "OASIS_CORE_VERSION_PARATIME" "$OASIS_CORE_VERSION" "$NETWORK_PARAMETER_CORE_VERSION"
 if [[ "$CONFIG_VALUE" != "$CUSTOM_OASIS_CORE_VERSION" ]]; then
@@ -79,7 +85,7 @@ CUSTOM_PARATIME_RUNTIME_IAS="$CONFIG_PARATIME_RUNTIME_IAS"
 CUSTOM_LATEST_TIME_ERROR="$CONFIG_LATEST_TIME_ERROR"
 EOF
 
-
+done
 
 #echo
 #echo "Type config"

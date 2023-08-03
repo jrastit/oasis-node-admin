@@ -4,6 +4,18 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 if [[ "$OASIS_CORE_VERSION" == "22."* ]]; then
 	case $OASIS_NODE_TYPE in
+		*emerald*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
+		;;
+		*cipher*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
+		;;
+		*sapphire*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
+		;;
 		validator)
 			echo "config validator"
 			$SCRIPT_NODE_ADMIN_DIR/config_node_validator.sh
@@ -11,22 +23,6 @@ if [[ "$OASIS_CORE_VERSION" == "22."* ]]; then
 		nonvalidator)
 			echo "config nonvalidator"
 			$SCRIPT_NODE_ADMIN_DIR/config_node_nonvalidator.sh
-		;;
-		validator_emerald)
-			echo "config validator with emerald"
-			$SCRIPT_NODE_ADMIN_DIR/config_node_validator_paratime.sh
-		;;
-		emerald)
-			echo "config emerald"
-			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
-		;;
-		cipher-paratime)
-			echo "config cipher"
-			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
-		;;
-		sapphire)
-			echo "config sapphire"
-			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime.sh
 		;;
 		*)
 			echo "config error type : $OASIS_NODE_TYPE not found"
