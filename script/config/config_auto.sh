@@ -46,6 +46,7 @@ EOF
 all=($OASIS_NODE_TYPE)
 for NODE_TYPE in "${all[@]}"; do
   . $SCRIPT_DIR/oasis_env.sh
+  . $SCRIPT_DIR/paratime_env.sh
   load_paratime $NODE_TYPE
   
 

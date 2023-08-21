@@ -1,6 +1,7 @@
 #/bin/bash
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
+. $SCRIPT_DIR/paratime_env.sh
 
 DIFF=$(diff $CONFIG_NETWORK_DIR/network_config.sh $CONFIG_NETWORK_DIR/network_config_2.sh)
 if [ "$DIFF" != "" ] 
@@ -27,7 +28,7 @@ for NODE_TYPE in "${all[@]}"; do
 DIFF=$(diff $CONFIG_TYPE_DIR/type_config.sh $CONFIG_TYPE_DIR/type_config_2.sh)
 if [ "$DIFF" != "" ] 
 then
-	echo "New config for type"
+	echo "New config for type $NODE_TYPE"
 	echo -n "$DIFF"
 	echo
 	read -p "Apply? " -n 1 -r
@@ -39,6 +40,8 @@ then
 		echo "apply config"
 	    	cp $CONFIG_TYPE_DIR/type_config_2.sh $CONFIG_TYPE_DIR/type_config.sh
 	fi
+else
+	echo "No new config for type $NODE_TYPE"
 fi
 
 done
