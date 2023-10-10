@@ -108,60 +108,17 @@ install_paratime_all() {
     done
 }
 
-get_paratime_id() {
-    local NODE_TYPE=$1
-    case $NODE_TYPE in
-	nonvalidator)
-		PARATIME_ID=
-	;;
-	validator)
-		PARATIME_ID=
-	;;
-	emerald)
-		if [ $OASIS_NODE_NETWORK == "mainnet" ]; then
-			PARATIME_ID="000000000000000000000000000000000000000000000000e2eaa99fc008f87f"
-		elif [ $OASIS_NODE_NETWORK == "testnet" ]; then
-			PARATIME_ID="00000000000000000000000000000000000000000000000072c8215e60d5bca7"
-		else
-			echo "config error network : $OASIS_NODE_NETWORK not found"
-		fi
-	;;
-	cipher)
-		if [ $OASIS_NODE_NETWORK == "mainnet" ]; then
-			PARATIME_ID="000000000000000000000000000000000000000000000000e199119c992377cb"
-		elif [ $OASIS_NODE_NETWORK == "testnet" ]; then
-			PARATIME_ID="0000000000000000000000000000000000000000000000000000000000000000"
-		else
-			echo "config error network : $OASIS_NODE_NETWORK not found"
-		fi
-	;;
-	sapphire)
-		if [ $OASIS_NODE_NETWORK == "mainnet" ]; then
-			PARATIME_ID="000000000000000000000000000000000000000000000000f80306c9858e7279"
-		elif [ $OASIS_NODE_NETWORK == "testnet" ]; then
-			PARATIME_ID="000000000000000000000000000000000000000000000000a6d1e3ebf60dff6c"
-		else
-			echo "config error network : $OASIS_NODE_NETWORK not found"
-		fi
-	;;
-	*)
-		echo "config error type : $NODE_TYPE not found"
-	;;
-esac
-
-}
-
 paratime_version () {
-	if [ "$PARATIME_ID" == "" ] ; then 
+	if [ "$PARATIME_RUNTIME_IDENTIFIER" == "" ] ; then 
 		echo `echo -e "$STATUS" | jq -r .software_version`
 		return
 	fi
-  	MAJOR=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[0].major"`
-  	MINOR=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[0].minor"`
-  	PATCH=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[0].patch"`
-  	MAJOR1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[1].major"`
-  	MINOR1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[1].minor"`
-  	PATCH1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.host.versions[1].patch"`
+  	MAJOR=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[0].major"`
+  	MINOR=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[0].minor"`
+  	PATCH=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[0].patch"`
+  	MAJOR1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[1].major"`
+  	MINOR1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[1].minor"`
+  	PATCH1=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.host.versions[1].patch"`
 	if [[ ${MAJOR} == 'null' ]] ; then
     		MAJOR=0
   	fi
@@ -201,12 +158,12 @@ paratime_version () {
   }
 
 paratime_status () {
-	if [ "$PARATIME_ID" == "" ] ; then 
+	if [ "$PARATIME_RUNTIME_IDENTIFIER" == "" ] ; then 
 		echo `echo -e "$STATUS" | jq -r .consensus.status`
 		return
 	fi
-  	PARATIME_STATUS=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".committee.status"`
-  	PARATIME_STATUS2=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_ID\".executor.status"`
+  	PARATIME_STATUS=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".committee.status"`
+  	PARATIME_STATUS2=`echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".executor.status"`
   	echo $PARATIME_STATUS/$PARATIME_STATUS2
   }
 
@@ -214,13 +171,12 @@ paratime_info_all() {
     INFO=""
     all=($OASIS_NODE_TYPE)
     for NODE_TYPE in "${all[@]}"; do
-        get_paratime_id $NODE_TYPE
         load_paratime $NODE_TYPE
         VERSION=$PARATIME_RUNTIME_VERSION
-        if [ "$PARATIME_ID" == "" ] ; then 
+        if [ "$PARATIME_RUNTIME_IDENTIFIER" == "" ] ; then 
         	VERSION=${OASIS_CORE_VERSION}
         fi
-        RUNTIME_VERSION=$(paratime_version $PARATIME_ID)
+        RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
   	if [[ ${VERSION} != ${RUNTIME_VERSION}* ]] ; then
     		ERROR="$ERROR `echo $NODE_TYPE version error ${RUNTIME_VERSION}/${VERSION}`\n"
 	fi

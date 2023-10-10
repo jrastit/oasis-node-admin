@@ -46,7 +46,7 @@ case $NODE_TYPE in
 		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 	;;
 	*)
-		echo "chain info: config error type : $NODE_TYPE not found"
+		echo "chain info2: config error type : $NODE_TYPE not found"
 	;;
 esac
 if [[ -n "$PARATIME_INDEX_IN_DOC" ]]; then
