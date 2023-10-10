@@ -10,8 +10,7 @@ HAS_ERROR=0
 STATUS=`$SCRIPT_NODE_INFO_DIR/status.sh`
 RESULT=$?
 if [[ RESULT -ne 0 ]] ; then
-  echo node error
-  HAS_ERROR=1
+  echo $OASIS_NODE_NAME node error
   exit 1
 fi
 
@@ -23,7 +22,6 @@ LATEST_TIME=`echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xarg
 LATEST_TIME_DIFF=$((`date +"%s"` - $LATEST_TIME))
 if [[ ${LATEST_TIME_DIFF} -gt "$LATEST_TIME_ERROR" ]] ; then
   ERROR="$ERROR latest time error\n"
-  HAS_ERROR=1
 fi
 
 if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
@@ -31,12 +29,14 @@ if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
 	LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
 	if [[ ${LAST_REGISTRATION_DIFF} -gt "$REGISTER_TIME_ERROR" ]] ; then
 	  ERROR="$ERROR latest registration error\n"
-	  HAS_ERROR=5
 	fi
 fi
 
 echo "$OASIS_NODE_NAME $INFO"
-echo -e "$ERROR" | sed -z '$ s/\n$//'
+if [[ $ERROR != "" ]]; then
+	echo -e "$ERROR" | sed -z '$ s/\n$//'
+	HAS_ERROR=1
+fi
 
 #IS_VALIDATOR=`echo -e "$STATUS" | jq -r .consensus.is_validator 2>/dev/null`
 #if [[ "$IS_VALIDATOR" == "true" ]] ; then
