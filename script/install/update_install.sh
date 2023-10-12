@@ -7,10 +7,10 @@ $SCRIPT_DIR/config/config_auto.sh
 $SCRIPT_DIR/config/config_confirm.sh
 
 . $SCRIPT_DIR/oasis_env.sh
-if [[ "$OASIS_CORE_VERSION" != "22."* ]]; then
-	echo skip because core version is not 22
-	exit 1
-fi
+#if [[ "$OASIS_CORE_VERSION" != "22."* ]]; then
+#	echo skip because core version is not 22
+#	exit 1
+#fi
 
 $SCRIPT_DIR/install/install_core.sh
 $SCRIPT_DIR/install/install_core_remote.sh

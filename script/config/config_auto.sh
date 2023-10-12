@@ -17,10 +17,10 @@ config_auto_value () {
 
 }
 
-if [[ "$NETWORK_PARAMETER_CORE_VERSION" != "22."* ]]; then
-	echo skip because core version is not 22
-	exit 1
-fi
+#if [[ "$NETWORK_PARAMETER_CORE_VERSION" != "22."* ]]; then
+#	echo skip because core version is not 22
+#	exit 1
+#fi
 
 config_auto_value "OASIS_CORE_VERSION" "$OASIS_CORE_VERSION" "$NETWORK_PARAMETER_CORE_VERSION"
 CONFIG_OASIS_CORE_VERSION="$CONFIG_VALUE"
