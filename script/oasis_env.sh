@@ -25,7 +25,7 @@ download_file () {
 }
 
 if [ -z "$OASIS_NODE_NAME" ] ; then 
-	OASIS_NODE_NAME=oasis_node
+	OASIS_NODE_NAME=mainnet
 fi
 
 LOCAL_DIR="$SCRIPT_DIR/.."
