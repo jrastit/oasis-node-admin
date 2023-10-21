@@ -1,4 +1,4 @@
 #!/bin/bash
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
-$SCRIPT_DIR/oasis.sh control status
+timeout 10 $SCRIPT_DIR/oasis.sh control status
