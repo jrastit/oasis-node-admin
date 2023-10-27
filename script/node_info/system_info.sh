@@ -4,3 +4,4 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 $REMOTE_CMD "df -h $OASIS_NODE_DIR"
 $REMOTE_CMD "lsb_release -a"
+$REMOTE_CMD "ps aux | grep oasis-node | grep config.yml"

@@ -21,7 +21,7 @@ all=($OASIS_NODE_TYPE)
 for NODE_TYPE in "${all[@]}"; do
   if [ $NODE_TYPE == "validator" ] ; then
   CMD="$CMD
-  validator: true"
+    validator: true"
   fi
 done
 CMD="$CMD
