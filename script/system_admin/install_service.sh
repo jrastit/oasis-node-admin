@@ -19,7 +19,6 @@ SendSIGKILL=no
 
 
 [Install]
-WantedBy=default.target
 RequiredBy=network.target
 
 EOF'"

@@ -2,6 +2,8 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
+PARATIME_RUNTIME_VERSION_OLD=""
+
 NODE_TYPE="validator"
 . $SCRIPT_DIR/chain_info/network_parameter.sh
 
