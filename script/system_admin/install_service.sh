@@ -2,7 +2,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 . $SCRIPT_DIR/oasis_env.sh
 
-$REMOTE_CMD_ADMIN "bash -c 'cat > /etc/systemd/user/oasis_$OASIS_NODE_NAME.service <<- EOF
+CMD="bash -c 'cat > /etc/systemd/user/oasis_$OASIS_NODE_NAME.service <<- EOF
 [Unit]
 Description=Oasis server $OASIS_NODE_NAME
 DefaultDependencies=no
@@ -22,5 +22,6 @@ SendSIGKILL=no
 RequiredBy=network.target
 
 EOF'"
-
+echo -e "$CMD"
+$REMOTE_CMD_ADMIN $CMD
 $REMOTE_CMD_ADMIN systemctl daemon-reload

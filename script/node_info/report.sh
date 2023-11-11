@@ -27,11 +27,12 @@ ERROR=""
 FREE_DISK=`$SSHCMD "cd $OASIS_NODE_ROOT_DIR && df -h ."`
 RESULT=$?
 
-
 if [[ RESULT -ne 0 ]] ; then
   echo -e "$OASIS_NODE_NAME${RED} not responding ${NC} $OASIS_NODE_ADDR"
   exit 1
 fi
+
+SERVICE_STATUS=`$REMOTE_CMD systemctl --user is-active oasis_$OASIS_NODE_NAME.service`
 
 FREE_DISK_INFO=`echo $FREE_DISK | awk 'NR==1 {print $10"/"$9}'`
 FREE_DISK_SCORE=`echo $FREE_DISK | awk 'NR==1 {print $12}' | tr -d '%'`
@@ -46,7 +47,7 @@ fi
 STATUS=`$SCRIPT_NODE_INFO_DIR/status.sh`
 RESULT=$?
 if [[ RESULT -ne 0 ]] ; then
-  echo -e "$OASIS_NODE_NAME${RED} status error ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"
+  echo -e "$OASIS_NODE_NAME $SERVICE_STATUS${RED} status error ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"
   exit 1
 fi
 
@@ -88,10 +89,10 @@ fi
 paratime_info_all $STATUS
 
 if [[ $ERROR != "" ]] ; then
-	echo -e "$OASIS_NODE_NAME${RED}$INFO $DISPLAY_TIME $REGISTRATION $VALIDATOR ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"
+	echo -e "$OASIS_NODE_NAME $SERVICE_STATUS${RED}$INFO $DISPLAY_TIME $REGISTRATION $VALIDATOR ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"
 	echo -e "${RED}$ERROR${NC}" | sed -z '$ s/\n$//'
 else
-	echo -e "$OASIS_NODE_NAME${GREEN}$INFO $DISPLAY_TIME $REGISTRATION $VALIDATOR ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"	
+	echo -e "$OASIS_NODE_NAME $SERVICE_STATUS${GREEN}$INFO $DISPLAY_TIME $REGISTRATION $VALIDATOR ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"	
 fi
 
 

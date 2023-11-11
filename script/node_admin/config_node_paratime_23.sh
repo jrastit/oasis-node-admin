@@ -13,7 +13,7 @@ common:
         level:
             cometbft: info
             cometbft/context: error
-            default: info
+            default: $LOG_LEVEL 
 consensus:
     external_address: tcp://$OASIS_NODE_ADDR:$OASIS_NODE_PORT
     listen_address: tcp://$OASIS_NODE_LISTEN_ADDR:$OASIS_NODE_PORT"

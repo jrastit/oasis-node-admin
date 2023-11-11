@@ -15,4 +15,5 @@ $SCRIPT_DIR/config/config_confirm.sh
 $SCRIPT_DIR/install/install_core.sh
 $SCRIPT_DIR/install/install_core_remote.sh
 $SCRIPT_DIR/install/install_paratime.sh
+$SCRIPT_DIR/install/install_node_script.sh
 $SCRIPT_DIR/node_admin/config_node.sh

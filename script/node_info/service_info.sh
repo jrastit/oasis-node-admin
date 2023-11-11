@@ -6,3 +6,5 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 $REMOTE_CMD "ls -l /etc/systemd/user"
 $REMOTE_CMD "systemctl --user status oasis_$OASIS_NODE_NAME.service"
 $REMOTE_CMD "journalctl -q -u oasis_$OASIS_NODE_NAME.service -n 100 --no-pager"
+$REMOTE_CMD systemctl --user is-active oasis_$OASIS_NODE_NAME.service
+
