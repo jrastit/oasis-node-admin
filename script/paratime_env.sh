@@ -168,23 +168,31 @@ paratime_status() {
 }
 
 paratime_info_all() {
-	INFO=""
+	VERSION=${OASIS_CORE_VERSION}
+	PARATIME_RUNTIME_IDENTIFIER=""
+	PARATIME_STATUS_RUNTIME=$(paratime_status)
+	RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
+	INFO="$RUNTIME_VERSION"
+	if [[ ${VERSION} != ${RUNTIME_VERSION}* ]]; then
+		ERROR="$ERROR $(echo core version error ${RUNTIME_VERSION}/${VERSION})\n"
+	fi
 	all=($OASIS_NODE_TYPE)
 	for NODE_TYPE in "${all[@]}"; do
 		load_paratime $NODE_TYPE
-		VERSION=$PARATIME_RUNTIME_VERSION
 		if [ "$PARATIME_RUNTIME_IDENTIFIER" == "" ]; then
-			VERSION=${OASIS_CORE_VERSION}
+			INFO="$INFO $NODE_TYPE"
+		else
+			VERSION=$PARATIME_RUNTIME_VERSION
+			RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
+			if [[ ${VERSION} != ${RUNTIME_VERSION}* ]]; then
+				ERROR="$ERROR $(echo $NODE_TYPE version error ${RUNTIME_VERSION}/${VERSION})\n"
+			fi
+			PARATIME_STATUS_RUNTIME=$(paratime_status)
+			if [[ $PARATIME_STATUS_RUNTIME != 'ready' && $PARATIME_STATUS_RUNTIME != 'ready/ready' ]]; then
+				ERROR="$ERROR $(echo $NODE_TYPE status error $PARATIME_STATUS_RUNTIME)\n"
+			fi
+			INFO="$INFO $NODE_TYPE $RUNTIME_VERSION"
 		fi
-		RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
-		if [[ ${VERSION} != ${RUNTIME_VERSION}* ]]; then
-			ERROR="$ERROR $(echo $NODE_TYPE version error ${RUNTIME_VERSION}/${VERSION})\n"
-		fi
-		PARATIME_STATUS_RUNTIME=$(paratime_status)
-		if [[ $PARATIME_STATUS_RUNTIME != 'ready' && $PARATIME_STATUS_RUNTIME != 'ready/ready' ]]; then
-			ERROR="$ERROR $(echo $NODE_TYPE status error $PARATIME_STATUS_RUNTIME)\n"
-		fi
-		INFO="$INFO $NODE_TYPE $RUNTIME_VERSION"
 	done
 }
 
