@@ -42,6 +42,7 @@ OASIS_NODE_PORT=26656
 OASIS_NODE_LISTEN_ADDR=0.0.0.0
 
 
+OASIS_CLI_VERSION="0.7.1"
 OASIS_CORE_VERSION="21.3.3"
 OASIS_GENESIS_URL="https://github.com/oasisprotocol/testnet-artifacts/releases/download/2021-04-13/genesis.json"
 OASIS_SEED_NODE="05EAC99BB37F6DAAD4B13386FF5E087ACBDDC450@34.86.165.6:26656"
@@ -164,7 +165,9 @@ fi
 OASIS_CORE_DIR="oasis_core_${OASIS_CORE_VERSION}_linux_amd64"
 OASIS_CORE_TAR="${OASIS_CORE_DIR}.tar.gz"
 OASIS_CORE_URL="https://github.com/oasisprotocol/oasis-core/releases/download/v${OASIS_CORE_VERSION}/${OASIS_CORE_TAR}"
-
+OASIS_CLI_DIR="oasis_cli_${OASIS_CLI_VERSION}_linux_amd64"
+OASIS_CLI_TAR="${OASIS_CLI_DIR}.tar.gz"
+OASIS_CLI_URL="https://github.com/oasisprotocol/cli/releases/download/v${OASIS_CLI_VERSION}/oasis_cli_0.7.1_linux_amd64.tar.gz"
 
 LOCAL_BIN="$LOCAL_DIR/oasis-core/$OASIS_CORE_DIR/oasis-node"
 LOCAL_TX="$LOCAL_DIR/tx"
