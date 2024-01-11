@@ -169,6 +169,7 @@ OASIS_CLI_DIR="oasis_cli_${OASIS_CLI_VERSION}_linux_amd64"
 OASIS_CLI_TAR="${OASIS_CLI_DIR}.tar.gz"
 OASIS_CLI_URL="https://github.com/oasisprotocol/cli/releases/download/v${OASIS_CLI_VERSION}/oasis_cli_0.7.1_linux_amd64.tar.gz"
 
+LOCAL_CLI_BIN="$LOCAL_DIR/oasis-cli/$OASIS_CLI_DIR/oasis"
 LOCAL_BIN="$LOCAL_DIR/oasis-core/$OASIS_CORE_DIR/oasis-node"
 LOCAL_TX="$LOCAL_DIR/tx"
 
