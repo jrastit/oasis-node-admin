@@ -23,5 +23,5 @@ RequiredBy=network.target
 
 EOF'"
 echo -e "$CMD"
-$REMOTE_CMD_ADMIN $CMD
+$REMOTE_CMD_ADMIN "$CMD"
 $REMOTE_CMD_ADMIN systemctl daemon-reload
