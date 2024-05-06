@@ -5,7 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 $OASIS_NODE_BIN unsafe-reset \
 	--preserve.mkvs_database=false \
-	--datadir=$OASIS_NODE_DIR/node/data \
-	--log.level info
+	--datadir=$OASIS_NODE_DIR/node/data
 
 
