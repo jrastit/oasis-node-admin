@@ -30,18 +30,18 @@ case $NODE_TYPE in
 	;;
 	emerald)
 		echo "config emerald"
-		PARATIME_INDEX_IN_DOC=3
+		PARATIME_INDEX_IN_DOC=4
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/emerald-paratime/releases/tag/v" 
 	;;
 	cipher)
 		echo "config cipher"
-		PARATIME_INDEX_IN_DOC=2
+		PARATIME_INDEX_IN_DOC=3
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/cipher-paratime/releases/tag/v" 
 		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 	;;
 	sapphire)
 		echo "config sapphire"
-		PARATIME_INDEX_IN_DOC=4
+		PARATIME_INDEX_IN_DOC=2
 		PARATIME_URL_ROOT="https://github.com/oasisprotocol/sapphire-paratime/releases/tag/v" 
 		NETWORK_PARAMETER_IAS=`echo -e "$NETWORK_PARAMETER" | grep "IAS proxy address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
 	;;
