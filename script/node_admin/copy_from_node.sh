@@ -5,7 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 echo source node data directory : 
 read SOURCE_NODE_DIR
 
-$REMOTE_CMD rm -rf $OASIS_NODE_DIR/node/data/tendermint/oasis_priv_validator.json $OASIS_NODE_DIR/node/data/tendermint/config
-$REMOTE_CMD rsync -av --stats --progress $SOURCE_NODE_DIR/node/data/tendermint/data $SOURCE_NODE_DIR/node/data/tendermint/abci-state $OASIS_NODE_DIR/node/data/tendermint 
-$REMOTE_CMD chmod go-xrw -R $OASIS_NODE_DIR/node/data/tendermint
+$REMOTE_CMD rm -rf $OASIS_NODE_DIR/node/data/consensus/state $OASIS_NODE_DIR/node/data/consensus/data
+$REMOTE_CMD rsync -av --stats --progress $SOURCE_NODE_DIR/node/data/consensus/data $SOURCE_NODE_DIR/node/data/consensus/state $OASIS_NODE_DIR/node/data/consensus
+$REMOTE_CMD chmod go-xrw -R $OASIS_NODE_DIR/node/data/consensus
 
