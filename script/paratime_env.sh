@@ -34,7 +34,7 @@ get_paratime_var() {
 		PARATIME_RUNTIME_ORC="sapphire-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION/sapphire-paratime.orc"
 		PARATIME_RUNTIME_ORC_LINK_OLD="https://github.com/oasisprotocol/sapphire-paratime/releases/download/v$PARATIME_RUNTIME_VERSION_OLD/sapphire-paratime.orc"
-		OASIS_NODE_PARATIME="cipher"
+		OASIS_NODE_PARATIME="sapphire"
 		;;
 	*)
 		echo "config error type : $NODE_TYPE not found"

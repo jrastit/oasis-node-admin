@@ -61,9 +61,12 @@ DISPLAY_TIME="- `displaytime $LATEST_TIME_DIFF`"
 if [[ ${LASTEST_TIME_DIFF} -gt "60000000000" ]] ; then
   DISPLAY_TIME="- not started" 
 fi
+
+paratime_info_all $STATUS
+
 #displaytime LATEST_TIME_DIFF
 #echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xargs date -d 2>/dev/null
-#echo Last Registration
+# echo Last Registration $OASIS_NODE_REGISTER
 if [[ "$OASIS_NODE_REGISTER" == "true" ]] ; then
 	LAST_REGISTRATION=`echo -e "$STATUS" | jq -r .registration.last_registration 2>/dev/null | xargs date +"%s" -d 2>/dev/null` 
 	LAST_REGISTRATION_DIFF=$((`date +"%s"` - $LAST_REGISTRATION))
@@ -86,7 +89,7 @@ fi
 #else
 #  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION $DISPLAY_TIME $REGISTRATION $VALIDATOR
 #fi
-paratime_info_all $STATUS
+
 
 if [[ $ERROR != "" ]] ; then
 	echo -e "$OASIS_NODE_NAME $SERVICE_STATUS ${RED}$INFO $DISPLAY_TIME $REGISTRATION $VALIDATOR ${NC}$FREE_DISK_INFO $OASIS_NODE_ADDR"
