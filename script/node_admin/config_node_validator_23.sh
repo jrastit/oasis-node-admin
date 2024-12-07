@@ -22,10 +22,10 @@ genesis:
   file: $OASIS_NODE_GENESIS
 
 p2p:
-    port: $PARATIME_WORKER_P2P_PORT
+    port: $OASIS_P2P_PORT
     registration:
         addresses:
-            - \"$OASIS_NODE_ADDR:$PARATIME_WORKER_P2P_PORT\"
+            - \"$OASIS_NODE_ADDR:$OASIS_P2P_PORT\"
     seeds:
         - \"$OASIS_SEED_NODE\"
 registration:
