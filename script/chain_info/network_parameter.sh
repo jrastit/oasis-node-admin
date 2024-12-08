@@ -20,6 +20,11 @@ OASIS_CORE_URL_ROOT="https://github.com/oasisprotocol/oasis-core/releases/tag/v"
 NETWORK_PARAMETER_CORE_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $OASIS_CORE_URL_ROOT | head -n 1 | awk -F "$OASIS_CORE_URL_ROOT|)" '{print $2}'`
 NETWORK_PARAMETER_GENESIS=`echo -e "$NETWORK_PARAMETER" | grep "genesis\.json" | awk -F "\\\\\\\\(|)" '{print $2}'`
 NETWORK_PARAMETER_SEED=`echo -e "$NETWORK_PARAMETER" | grep "Oasis seed node address" -A 1 | tail -n 1 | awk -F "\\\`" '{print $2}'`
+NETWORK_PARAMETER_SEED1=`echo -e "$NETWORK_PARAMETER" | grep "Oasis seed node address" -A 2 | tail -n 1 | awk -F "\\\`" '{print $2}'`
+NETWORK_PARAMETER_SEED2=`echo -e "$NETWORK_PARAMETER" | grep "Oasis seed node address" -A 3 | tail -n 1 | awk -F "\\\`" '{print $2}'`
+NETWORK_PARAMETER_SEED3=`echo -e "$NETWORK_PARAMETER" | grep "Oasis seed node address" -A 4 | tail -n 1 | awk -F "\\\`" '{print $2}'`
+NETWORK_PARAMETER_SEED="$NETWORK_PARAMETER_SEED $NETWORK_PARAMETER_SEED1 $NETWORK_PARAMETER_SEED2 $NETWORK_PARAMETER_SEED3"
+
 
 case $NODE_TYPE in
 	validator)

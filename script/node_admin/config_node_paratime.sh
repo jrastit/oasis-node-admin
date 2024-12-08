@@ -47,8 +47,14 @@ CMD="$CMD
       listen_address: tcp://$OASIS_NODE_LISTEN_ADDR:$OASIS_NODE_PORT
       external_address: tcp://$OASIS_NODE_ADDR:$OASIS_NODE_PORT
     p2p:
-      seed:
-        - \"$OASIS_SEED_NODE\"
+      seed:"
+all=($OASIS_SEED_NODE)
+for SEED_NODE in "${all[@]}"; do
+  CMD="$CMD
+        - \"$SEED_NODE\""  
+done
+
+CMD="$CMD
 
 runtime:
   mode: compute
