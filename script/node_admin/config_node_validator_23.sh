@@ -27,7 +27,14 @@ p2p:
         addresses:
             - \"$OASIS_NODE_ADDR:$OASIS_P2P_PORT\"
     seeds:
-        - \"$OASIS_SEED_NODE\"
+all=($OASIS_SEED_NODE)
+for SEED_NODE in "${all[@]}"; do
+  CMD="$CMD
+        - \"$SEED_NODE\""  
+done
+
+CMD="$CMD
+
 registration:
     entity: $OASIS_NODE_DIR/node/entity/entity.json
 

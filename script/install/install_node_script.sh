@@ -4,6 +4,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 $REMOTE_CMD "cat > $OASIS_NODE_DIR/start_node.sh <<- EOF
 #!/bin/bash
+if [ -f "$OASIS_NODE_DIR/service_disable" ]; then
+    echo "Service is disabled. Exiting."
+    exit 0
+fi
 $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-node --config $OASIS_NODE_CONFIG
 
 EOF"
