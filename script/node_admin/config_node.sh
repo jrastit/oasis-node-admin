@@ -54,6 +54,32 @@ elif [[ "$OASIS_CORE_VERSION" == "23."*  || "$OASIS_CORE_VERSION" == "24."* ]]; 
 			echo "config error type : $OASIS_NODE_TYPE not found"
 		;;
 	esac
+elif [[ "$OASIS_CORE_VERSION" == "25."*  ]]; then
+	case $OASIS_NODE_TYPE in
+		*emerald*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime_25.sh
+		;;
+		*cipher*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime_25.sh
+		;;
+		*sapphire*)
+			echo "config paratime"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_paratime_25.sh
+		;;
+		validator)
+			echo "config validator"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_validator_25.sh
+		;;
+		nonvalidator)
+			echo "config nonvalidator"
+			$SCRIPT_NODE_ADMIN_DIR/config_node_nonvalidator_25.sh
+		;;
+		*)
+			echo "config error type : $OASIS_NODE_TYPE not found"
+		;;
+	esac
 else
 	echo "config error type : $OASIS_CORE_VERSION not supported"
 fi
