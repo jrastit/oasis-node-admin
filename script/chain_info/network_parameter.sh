@@ -59,6 +59,6 @@ if [[ -n "$PARATIME_INDEX_IN_DOC" ]]; then
 	NETWORK_PARAMETER_RUNTIME_IDENTIFIER=`echo -e "$NETWORK_PARAMETER" | grep "Runtime identifier" -A 1 | grep '\`' | head -n "$(expr $PARATIME_INDEX_IN_DOC - 1)" | tail -n 1 | awk -F "\\\`" '{print $2}'`
 fi
 if [[ -n "$PARATIME_URL_ROOT" ]]; then
-	NETWORK_PARAMETER_PARATIME_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $PARATIME_URL_ROOT | sort | tail -n 1 | awk -F "$PARATIME_URL_ROOT|)" '{print $2}'`
+	NETWORK_PARAMETER_PARATIME_VERSION=`echo -e "$NETWORK_PARAMETER" | grep $PARATIME_URL_ROOT | sort -V | tail -n 1 | awk -F "$PARATIME_URL_ROOT|)" '{print $2}'`
 fi
 
