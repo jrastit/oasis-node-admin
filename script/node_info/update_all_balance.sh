@@ -31,7 +31,7 @@ for month in {1..12}; do
 				echo $ERROR
 				continue
 			fi
-
+			echo $SCRIPT_DIR/cli_local.sh account show --show-delegations $OASIS_NODE_ENTITY --network $OASIS_NODE_NETWORK --height $block_height --no-paratime
 			UPDATE_BALANCE=`$SCRIPT_DIR/cli_local.sh account show --show-delegations $OASIS_NODE_ENTITY --network $OASIS_NODE_NETWORK --height $block_height --no-paratime`
 			# echo -e "$UPDATE_BALANCE"
 

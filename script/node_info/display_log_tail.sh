@@ -4,4 +4,4 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 echo $OASIS_NODE_LOG_FILE
 $REMOTE_CMD "ls -l $OASIS_NODE_LOG_FILE"
-$REMOTE_CMD "tail -n 100 $OASIS_NODE_LOG_FILE"
+$REMOTE_CMD "tail -n 10000 $OASIS_NODE_LOG_FILE"

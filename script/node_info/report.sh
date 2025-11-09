@@ -89,16 +89,30 @@ fi
 #else
 #  echo $CORE_VERSION/${OASIS_CORE_VERSION} - $PARATIME_VERSION/$PARATIME_RUNTIME_VERSION $DISPLAY_TIME $REGISTRATION $VALIDATOR
 #fi
-NODE_ADDRESS=`echo -e "$STATUS" | jq -r .consensus.p2p.addresses[0] 2>/dev/null | awk -F'@' '{print $2}'`
+NODE_ADDRESSES=($(echo -e "$STATUS" | jq -r '.consensus.p2p.addresses[]' 2>/dev/null | awk -F'@' '{print $2}'))
 CONFIG_NODE_ADDRESS="$OASIS_NODE_ADDR:$OASIS_NODE_PORT"
-if [[ "$NODE_ADDRESS" != "$CONFIG_NODE_ADDRESS" ]]; then
-  ERROR="$ERROR node address error $NODE_ADDRESS/$CONFIG_NODE_ADDRESS \n"
+NODE_ADDRESS_MATCHED=false
+for addr in "${NODE_ADDRESSES[@]}"; do
+  if [[ "$addr" == "$CONFIG_NODE_ADDRESS" ]]; then
+    NODE_ADDRESS_MATCHED=true
+    break
+  fi
+done
+if [[ "$NODE_ADDRESS_MATCHED" == "false" ]]; then
+  ERROR="$ERROR node address error ${NODE_ADDRESSES[*]}/$CONFIG_NODE_ADDRESS \n"
 fi
 
-P2P_ADDRESS=`echo -e "$STATUS" | jq -r .p2p.addresses[0] 2>/dev/null`
+P2P_ADDRESSES=($(echo -e "$STATUS" | jq -r '.p2p.addresses[]' 2>/dev/null))
 CONFIG_P2P_ADDRESS="$OASIS_NODE_ADDR:$OASIS_P2P_PORT"
-if [[ "$P2P_ADDRESS" != "$CONFIG_P2P_ADDRESS" ]]; then
-  ERROR="$ERROR p2p address error $P2P_ADDRESS/$CONFIG_P2P_ADDRESS \n"
+P2P_ADDRESS_MATCHED=false
+for addr in "${P2P_ADDRESSES[@]}"; do
+  if [[ "$addr" == "$CONFIG_P2P_ADDRESS" ]]; then
+    P2P_ADDRESS_MATCHED=true
+    break
+  fi
+done
+if [[ "$P2P_ADDRESS_MATCHED" == "false" ]]; then
+  ERROR="$ERROR p2p address error ${P2P_ADDRESSES[*]}/$CONFIG_P2P_ADDRESS \n"
 fi
 
 if [[ $ERROR != "" ]] ; then
