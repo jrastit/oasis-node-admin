@@ -63,6 +63,7 @@ if [[ ${LASTEST_TIME_DIFF} -gt "60000000000" ]] ; then
 fi
 
 paratime_info_all $STATUS
+paratime_reindexing_all $STATUS
 
 #displaytime LATEST_TIME_DIFF
 #echo -e "$STATUS" | jq -r .consensus.latest_time 2>/dev/null | xargs date -d 2>/dev/null

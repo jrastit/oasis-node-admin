@@ -158,6 +158,39 @@ paratime_status() {
 	echo $PARATIME_STATUS/$PARATIME_STATUS2
 }
 
+paratime_reindexing() {
+	if [ "$PARATIME_RUNTIME_IDENTIFIER" == "" ]; then
+		echo $(echo -e "$STATUS" | jq -r .consensus.reindexing)
+		return
+	fi
+	PARATIME_REINDEXING_LAST_HEIGHT=$(echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".indexer.reindex_status.last_height")
+	PARATIME_REINDEXING_END_HEIGHT=$(echo -e "$STATUS" | jq -r ".runtimes.\"$PARATIME_RUNTIME_IDENTIFIER\".indexer.reindex_status.end_height")
+	if [[ "$PARATIME_REINDEXING_END_HEIGHT" != "null" && "$PARATIME_REINDEXING_END_HEIGHT" -gt 0 ]]; then
+		PERCENT=$(awk "BEGIN {printf \"%.3f\", 100 * $PARATIME_REINDEXING_LAST_HEIGHT / $PARATIME_REINDEXING_END_HEIGHT}")
+		echo "$PERCENT%"
+	else
+		echo "N/A"
+	fi
+}
+
+paratime_reindexing_all() {
+	VERSION=${OASIS_CORE_VERSION}
+	PARATIME_RUNTIME_IDENTIFIER=""
+	PARATIME_STATUS_RUNTIME=$(paratime_status)
+	RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
+	INFO="$RUNTIME_VERSION"
+	all=($OASIS_NODE_TYPE)
+	for NODE_TYPE in "${all[@]}"; do
+		load_paratime $NODE_TYPE
+		if [ "$PARATIME_RUNTIME_IDENTIFIER" != "" ]; then
+			PARATIME_REINDEXING_RUNTIME=$(paratime_reindexing)
+			if [[ $PARATIME_REINDEXING_RUNTIME != 'N/A' && $PARATIME_REINDEXING_RUNTIME != '' ]]; then
+				ERROR="$ERROR $(echo $NODE_TYPE reindexing $PARATIME_REINDEXING_RUNTIME)\n"
+			fi
+		fi
+	done
+}
+
 paratime_info_all() {
 	VERSION=${OASIS_CORE_VERSION}
 	PARATIME_RUNTIME_IDENTIFIER=""
