@@ -17,6 +17,12 @@ common:
 consensus:
     external_address: tcp://$OASIS_NODE_ADDR:$OASIS_NODE_PORT
     listen_address: tcp://$OASIS_NODE_LISTEN_ADDR:$OASIS_NODE_PORT"
+if [[ "$OASIS_NODE_PRUNE_CONSENSUS_NUM_KEPT" =~ ^[0-9]+$ ]] ; then
+CMD="$CMD
+    prune:
+        strategy: keep_n
+        num_kept: $OASIS_NODE_PRUNE_CONSENSUS_NUM_KEPT"
+fi
 all=($OASIS_NODE_TYPE)
 for NODE_TYPE in "${all[@]}"; do
   if [ $NODE_TYPE == "validator" ] ; then
