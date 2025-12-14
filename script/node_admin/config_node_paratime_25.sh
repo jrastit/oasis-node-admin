@@ -32,7 +32,7 @@ for NODE_TYPE in "${all[@]}"; do
 done
 CMD="$CMD
 genesis:
-  file: $OASIS_NODE_GENESIS
+    file: $OASIS_NODE_GENESIS
 
 p2p:
     port: $OASIS_P2P_PORT
@@ -52,7 +52,7 @@ registration:
     entity: $OASIS_NODE_DIR/node/entity/entity.json
 
 runtime:
-  paths:"
+    paths:"
 
 RUNTIME_IAS=""
 SGX_LOADER=""
@@ -62,11 +62,11 @@ for NODE_TYPE in "${all[@]}"; do
   load_paratime $NODE_TYPE
   if [ -n "$PARATIME_RUNTIME_REMOTE_DIR" ] ; then
   CMD="$CMD
-    - $PARATIME_RUNTIME_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
+        - $PARATIME_RUNTIME_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
   fi
   if [ -n "$PARATIME_RUNTIME_OLD_REMOTE_DIR" ] ; then
   CMD="$CMD
-    - $PARATIME_RUNTIME_OLD_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
+        - $PARATIME_RUNTIME_OLD_REMOTE_DIR/$PARATIME_RUNTIME_ORC" 
   fi
   if [ -n "$PARATIME_RUNTIME_IAS" ] && [ -z "$RUNTIME_IAS" ] ; then
     echo "Setting IAS address to $PARATIME_RUNTIME_IAS"
@@ -77,6 +77,12 @@ for NODE_TYPE in "${all[@]}"; do
     SGX_LOADER="true"
   fi
 done
+if [[ "$OASIS_NODE_PRUNE_RUNTIME_NUM_KEPT" =~ ^[0-9]+$ ]] ; then
+CMD="$CMD
+    prune:
+        strategy: keep_last
+        num_kept: $OASIS_NODE_PRUNE_RUNTIME_NUM_KEPT"
+fi
 
 if [ -n "$SGX_LOADER" ] ; then
     CMD="$CMD

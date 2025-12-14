@@ -177,8 +177,6 @@ paratime_reindexing_all() {
 	VERSION=${OASIS_CORE_VERSION}
 	PARATIME_RUNTIME_IDENTIFIER=""
 	PARATIME_STATUS_RUNTIME=$(paratime_status)
-	RUNTIME_VERSION=$(paratime_version $PARATIME_RUNTIME_IDENTIFIER)
-	INFO="$RUNTIME_VERSION"
 	all=($OASIS_NODE_TYPE)
 	for NODE_TYPE in "${all[@]}"; do
 		load_paratime $NODE_TYPE
