@@ -86,7 +86,7 @@ fi
 
 if [ -n "$SGX_LOADER" ] ; then
     CMD="$CMD
-  sgx_loader: $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-core-runtime-loader
+    sgx_loader: $OASIS_NODE_BIN_PATH/$OASIS_CORE_DIR/oasis-core-runtime-loader
 "
 fi
 if [ -n "$RUNTIME_IAS" ] ; then

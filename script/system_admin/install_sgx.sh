@@ -14,7 +14,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
 
 
 $REMOTE_CMD_ADMIN "curl -fsSL https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo gpg --dearmor -o /usr/share/keyrings/intel-sgx-deb.gpg"
-$REMOTE_CMD_ADMIN "echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/intel-sgx-deb.gpg] https://download.01.org/intel-sgx/sgx_repo/ubuntu $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/intel-sgx.list > /dev/null"
+$REMOTE_CMD_ADMIN "echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/intel-sgx-deb.gpg] https://download.01.org/intel-sgx/sgx_repo/ubuntu jammy main\" | sudo tee /etc/apt/sources.list.d/intel-sgx.list > /dev/null"
 
 echo $REMOTE_CMD_ADMIN apt-get update
 $REMOTE_CMD_ADMIN apt-get update
