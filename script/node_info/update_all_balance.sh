@@ -7,7 +7,7 @@ ERROR=
 # target_dir=$SCRIPT_DIR/../update_balance
 mkdir -p $target_dir
 
-#echo "date ; balance" > $SCRIPT_DIR/../report/balance.csv
+echo "date ; balance" > $SCRIPT_DIR/../report/balance_$YEAR.csv
 
 for month in {1..12}; do
 	for day in {01..31}; do
@@ -51,7 +51,7 @@ for month in {1..12}; do
 			# echo -e $UPDATE_BALANCE > $target_dir/${timestamp}_result.txt
 			BALANCE=`cut -d ' ' -f 4 <<< $TOTAL | cut -d '.' -f 1`
 			DATE2=`date -d @$timestamp +%d/%m/%Y`
-			#echo "$DATE2 ; $BALANCE" >> $SCRIPT_DIR/../report/balance.csv
+			echo "$DATE2 ; $BALANCE" >> $SCRIPT_DIR/../report/balance_$YEAR.csv
 			sleep 0
 		fi
 	done

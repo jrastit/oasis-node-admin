@@ -26,6 +26,19 @@ $REMOTE_CMD_ADMIN "apt-get install sgx-aesm-service libsgx-aesm-ecdsa-plugin lib
 # $REMOTE_CMD_ADMIN sed -i s/devsgx=y/devsgx=n/g /etc/modprobe.d/fortanix-isgx.conf
 $REMOTE_CMD_ADMIN "sudo sed -i 's|\"pccs_url\": \"https://localhost:8081/sgx/certification/v4/\"|\"pccs_url\": \"https://api.trustedservices.intel.com/sgx/certification/v4/\"|' /etc/sgx_default_qcnl.conf"
 
+$REMOTE_CMD_ADMIN "cat << 'EOF' | sudo tee /etc/apparmor.d/bwrap > /dev/null
+abi <abi/4.0>,
+include <tunables/global>
 
+
+profile bwrap /usr/bin/bwrap flags=(unconfined) {
+    userns,
+
+    # Site-specific additions and overrides. See local/README for details.
+    include if exists <local/bwrap>
+}
+EOF"
+
+$REMOTE_CMD_ADMIN "sudo systemctl reload apparmor"
 
 

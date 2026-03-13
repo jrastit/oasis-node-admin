@@ -54,7 +54,7 @@ elif [[ "$OASIS_CORE_VERSION" == "23."*  || "$OASIS_CORE_VERSION" == "24."* ]]; 
 			echo "config error type : $OASIS_NODE_TYPE not found"
 		;;
 	esac
-elif [[ "$OASIS_CORE_VERSION" == "25."*  ]]; then
+elif [[ "$OASIS_CORE_VERSION" == "25."* || "$OASIS_CORE_VERSION" == "26."* ]]; then
 	case $OASIS_NODE_TYPE in
 		*emerald*)
 			echo "config paratime"
